@@ -37,8 +37,8 @@ def main():
         
         print(f"Calculando agenda óptima para {capacidad_quirofano_minutos} minutos con w={peso_w}...")
         
-        pesos_estaticos = {"Jclin": 1.0, "Tlist": 0.5, "Opat": 0.8} 
-        pesos_dinamicos = {"Sever": 1.2, "Urg": 1.5, "Dolor": 1.1}  
+        pesos_estaticos = {"Jclin": 0.066, "Tlist": 0.062, "Opat": 0.047} 
+        pesos_dinamicos = {"Sever": 0.081, "Urg": 0.076, "Dolor": 0.040}  
         tasas_lambda = {"Sever": 0.05, "Urg": 0.1, "Dolor": 0.02}   
         
         # Ejecutamos la búsqueda pasando todos los parámetros requeridos

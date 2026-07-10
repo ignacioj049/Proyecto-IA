@@ -37,9 +37,20 @@ def main():
         
         print(f"Calculando agenda óptima para {capacidad_quirofano_minutos} minutos con w={peso_w}...")
         
-        pesos_estaticos = {"Jclin": 0.066, "Tlist": 0.062, "Opat": 0.047} 
-        pesos_dinamicos = {"Sever": 0.081, "Urg": 0.076, "Dolor": 0.040}  
-        tasas_lambda = {"Sever": 0.05, "Urg": 0.1, "Dolor": 0.02}   
+        pesos_estaticos = {
+        "Jclin": 0.066, "Tlist": 0.062, "Dest": 0.054, "Opat": 0.047, 
+        "Diag": 0.046, "Ncuid": 0.043, "Rcuid": 0.043, "Dtrab": 0.038, 
+        "Acc": 0.033, "Dtras": 0.028, "Ccrit": 0.023
+} 
+        pesos_dinamicos = {
+        "Sever": 0.081, "Urg": 0.076, "Tsuen": 0.063, "Pmcx": 0.055, 
+        "Com": 0.053, "Lfam": 0.053, "Hanor": 0.052, "Olim": 0.045, "Dolor": 0.040
+}
+        tasas_lambda = {
+        "A": [0.10, 0.20, 0.30, 0.40],
+        "B": [0.20, 0.05, 0.05, 0.00],
+        "C": [0.05, 0.05, 0.10, 0.15]
+} 
         
         # Ejecutamos la búsqueda pasando todos los parámetros requeridos
         estado_final = weighted_a_star(

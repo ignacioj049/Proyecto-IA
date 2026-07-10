@@ -21,9 +21,12 @@ def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int
     
     frontera = []
     heapq.heappush(frontera, nodo_inicial)
-    
+    iteraciones = 0
     while frontera:
         nodo_actual = heapq.heappop(frontera)
+        iteraciones += 1
+        if iteraciones % 100 == 0:
+            print(f"⏳ Explorando... Nodos evaluados: {iteraciones} | Pacientes en agenda temporal: {len(nodo_actual.agenda_parcial)}")
         
         # Condición de Parada: Agenda completa[cite: 2]
         if not nodo_actual.pacientes_pendientes or nodo_actual.tiempo_restante <= 0:

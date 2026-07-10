@@ -1,30 +1,28 @@
-# Proyecto-IA
-
 ## Cómo ejecutar
 
-Este proyecto implementa una estrategia de priorización de pacientes en lista de espera quirúrgica usando un enfoque greedy. El flujo general es:
-
-1. Generar un dataset sintético de pacientes.
-2. Calcular el score biopsicosocial dinámico y la vulnerabilidad de cada paciente.
-3. Aplicar el algoritmo greedy para seleccionar pacientes según las horas disponibles de pabellón.
-4. Guardar la selección final en un archivo CSV.
+El proyecto implementa una priorización de pacientes en lista de espera quirúrgica basada en el paper *Patients’ Prioritization on Surgical Waiting Lists: A Decision Support System*. Primero se genera un dataset sintético de pacientes y luego se aplica un algoritmo greedy para seleccionar pacientes según la capacidad disponible de pabellón.
 
 ### Estructura del proyecto
 
 ```text
 Proyecto-IA/
 ├── generar_pacientes.py
+├── data/
+│   ├── pacientes.csv
+│   └── pacientes.json
 ├── Greedy/
-│   └── greedy_priorizacion.py
+│   ├── algoritmo.py
+│   ├── main.py
+│   └── seleccion_greedy.csv
 └── README.md
 ```
 
 ### 1. Instalar dependencias
 
-El proyecto utiliza `pandas` y `numpy`. Para instalarlas:
+El proyecto utiliza `numpy` y `pandas`.
 
 ```bash
-pip install pandas numpy
+pip install numpy pandas
 ```
 
 ### 2. Generar el dataset de pacientes
@@ -35,34 +33,54 @@ Desde la raíz del proyecto, ejecutar:
 python generar_pacientes.py
 ```
 
-Esto genera los archivos:
+Este script genera pacientes sintéticos con variables clínicas y psicosociales inspiradas en el paper. Además, calcula para cada paciente:
+
+* score estático,
+* score dinámico,
+* vulnerabilidad,
+* grupo de prioridad,
+* tipo de diagnóstico,
+* duración estimada de cirugía.
+
+La salida se guarda en:
 
 ```text
 data/pacientes.csv
 data/pacientes.json
 ```
 
-Estos archivos contienen pacientes sintéticos con sus variables biopsicosociales, score estático, score dinámico, vulnerabilidad y grupo de prioridad.
-
 ### 3. Ejecutar el algoritmo greedy
 
 Desde la raíz del proyecto, ejecutar:
 
 ```bash
-python Greedy/greedy_priorizacion.py
+python Greedy/main.py
 ```
 
-El algoritmo selecciona pacientes considerando una cantidad fija de horas disponibles de pabellón. Actualmente, la capacidad usada es:
+El archivo `Greedy/main.py` carga los pacientes generados, aplica el algoritmo greedy y muestra por consola la selección de pacientes.
+
+La capacidad disponible de pabellón se define en:
 
 ```python
 horas_pabellon = 8.0
 ```
 
-Esta variable puede modificarse dentro del archivo `Greedy/greedy_priorizacion.py`.
+Este valor puede modificarse en `Greedy/main.py`.
 
 ### 4. Salida esperada
 
-Al ejecutar el algoritmo greedy, se muestra por consola la lista de pacientes seleccionados, junto con un resumen como:
+El algoritmo imprime una tabla con los pacientes seleccionados, incluyendo:
+
+* ID del paciente,
+* diagnóstico,
+* tipo de diagnóstico,
+* grupo de prioridad,
+* score dinámico,
+* vulnerabilidad,
+* duración de la cirugía,
+* horas restantes antes y después de seleccionar al paciente.
+
+También muestra un resumen con:
 
 ```text
 Horas disponibles
@@ -72,31 +90,48 @@ Uso de pabellón
 Pacientes seleccionados
 ```
 
-Además, se genera un archivo CSV con la selección final:
+La selección final se guarda en:
 
 ```text
 Greedy/seleccion_greedy.csv
 ```
 
-### Criterio greedy utilizado
+## Algoritmo greedy
 
-El algoritmo ordena los pacientes según los siguientes criterios:
+El algoritmo greedy selecciona pacientes de manera secuencial según un ranking de prioridad. Los pacientes se ordenan usando los siguientes criterios:
 
 1. Grupo de prioridad.
 2. Tipo de diagnóstico.
 3. Vulnerabilidad.
 4. Score dinámico.
 
-Luego recorre la lista ordenada y selecciona a un paciente si su cirugía cabe dentro de las horas restantes de pabellón. El proceso termina cuando no quedan horas suficientes o no hay más pacientes factibles.
-
-En términos generales, el criterio greedy puede resumirse como:
+La prioridad de diagnóstico se define como:
 
 ```text
-Mientras queden horas disponibles:
-    tomar el siguiente paciente más prioritario
-    si su cirugía cabe en el tiempo restante:
-        seleccionarlo
-        descontar su duración
+Tipo A → mayor prioridad, diagnóstico que empeora rápido
+Tipo B → prioridad intermedia
+Tipo C → menor prioridad, diagnóstico que empeora lentamente
 ```
 
-Este enfoque no busca evaluar todas las combinaciones posibles de pacientes, sino seleccionar localmente la mejor opción disponible en cada paso según el ranking definido.
+Luego, el algoritmo recorre la lista ordenada y selecciona a un paciente si su cirugía cabe dentro de las horas restantes de pabellón.
+
+En pseudocódigo:
+
+```text
+Ordenar pacientes por grupo, tipo de diagnóstico, vulnerabilidad y score dinámico
+
+Mientras queden pacientes por revisar:
+    tomar el siguiente paciente más prioritario
+
+    si la duración de su cirugía cabe en el tiempo restante:
+        seleccionar paciente
+        descontar duración de cirugía
+
+    si no cabe:
+        saltar al siguiente paciente
+
+Finalizar cuando no queden pacientes factibles o no quede tiempo suficiente
+```
+
+Este enfoque no explora todas las combinaciones posibles de pacientes. En cambio, toma en cada paso la mejor decisión local según el ranking definido. Por eso corresponde a una heurística greedy.
+

@@ -28,7 +28,7 @@ def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int
         if iteraciones % 100 == 0:
             print(f"⏳ Explorando... Nodos evaluados: {iteraciones} | Pacientes en agenda temporal: {len(nodo_actual.agenda_parcial)}")
         
-        # Condición de Parada: Agenda completa[cite: 2]
+        # Condición de Parada: Agenda completa
         if not nodo_actual.pacientes_pendientes or nodo_actual.tiempo_restante <= 0:
             return nodo_actual
             

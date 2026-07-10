@@ -15,18 +15,17 @@ def main():
     seleccion = greedy_priorizacion(df, horas_pabellon)
 
     columnas = [
-        "id_paciente",
-        "Diag",
-        "tipo_diagnostico",
-        "grupo_prioridad",
-        "score_dinamico",
-        "vulnerabilidad",
-        "duracion_cirugia_horas",
-        "dias_extra_asignacion",
-        "riesgo_asignacion",
-        "costo_estimado_greedy",
-        "horas_restantes_antes",
-        "horas_restantes_despues",
+    "id_paciente",
+    "Diag",
+    "tipo_diagnostico",
+    "grupo_prioridad",
+    "score_dinamico",
+    "vulnerabilidad",
+    "duracion_cirugia_horas",
+    "riesgo_asignacion",
+    "costo_estimado_greedy",
+    "horas_restantes_antes",
+    "horas_restantes_despues",
     ]
 
     print("\nPacientes seleccionados por greedy:\n")

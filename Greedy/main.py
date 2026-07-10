@@ -22,6 +22,9 @@ def main():
         "score_dinamico",
         "vulnerabilidad",
         "duracion_cirugia_horas",
+        "dias_extra_asignacion",
+        "riesgo_asignacion",
+        "costo_estimado_greedy",
         "horas_restantes_antes",
         "horas_restantes_despues",
     ]

@@ -1,8 +1,13 @@
-## Cómo ejecutar
+# Proyecto IA — Priorización de pacientes en lista de espera quirúrgica
 
-El proyecto implementa una priorización de pacientes en lista de espera quirúrgica basada en el paper *Patients’ Prioritization on Surgical Waiting Lists: A Decision Support System*. Primero se genera un dataset sintético de pacientes y luego se aplica un algoritmo greedy para seleccionar pacientes según la capacidad disponible de pabellón.
+Este proyecto implementa una priorización de pacientes en lista de espera quirúrgica basada en el paper *Patients’ Prioritization on Surgical Waiting Lists: A Decision Support System*.
+El sistema utiliza variables clínicas y psicosociales para calcular un score dinámico de riesgo, vulnerabilidad y prioridad de los pacientes.
 
-### Estructura del proyecto
+Además, se implementa un enfoque greedy para construir una agenda quirúrgica bajo una restricción de horas disponibles de pabellón.
+
+---
+
+## Estructura del proyecto
 
 ```text
 Proyecto-IA/
@@ -17,15 +22,23 @@ Proyecto-IA/
 └── README.md
 ```
 
-### 1. Instalar dependencias
+---
+
+## Dependencias
 
 El proyecto utiliza `numpy` y `pandas`.
+
+Para instalar las dependencias:
 
 ```bash
 pip install numpy pandas
 ```
 
-### 2. Generar el dataset de pacientes
+---
+
+## Cómo ejecutar
+
+### 1. Generar el dataset de pacientes
 
 Desde la raíz del proyecto, ejecutar:
 
@@ -49,7 +62,9 @@ data/pacientes.csv
 data/pacientes.json
 ```
 
-### 3. Ejecutar el algoritmo greedy
+---
+
+### 2. Ejecutar el algoritmo greedy
 
 Desde la raíz del proyecto, ejecutar:
 
@@ -67,7 +82,9 @@ horas_pabellon = 8.0
 
 Este valor puede modificarse en `Greedy/main.py`.
 
-### 4. Salida esperada
+---
+
+## Salida esperada
 
 El algoritmo imprime una tabla con los pacientes seleccionados, incluyendo:
 
@@ -78,6 +95,9 @@ El algoritmo imprime una tabla con los pacientes seleccionados, incluyendo:
 * score dinámico,
 * vulnerabilidad,
 * duración de la cirugía,
+* días equivalentes de espera al momento de agendar,
+* riesgo dinámico del paciente en su posición de agenda,
+* costo estimado usado por el algoritmo greedy,
 * horas restantes antes y después de seleccionar al paciente.
 
 También muestra un resumen con:
@@ -96,42 +116,78 @@ La selección final se guarda en:
 Greedy/seleccion_greedy.csv
 ```
 
+---
+
 ## Algoritmo greedy
 
-El algoritmo greedy selecciona pacientes de manera secuencial según un ranking de prioridad. Los pacientes se ordenan usando los siguientes criterios:
+El algoritmo greedy implementado sigue la misma idea conceptual del enfoque wA*: minimizar el deterioro acumulado de la lista de espera. En lugar de seleccionar simplemente al paciente con mayor prioridad actual, el algoritmo evalúa localmente qué paciente conviene agendar en la posición actual de la agenda.
 
-1. Grupo de prioridad.
-2. Tipo de diagnóstico.
-3. Vulnerabilidad.
-4. Score dinámico.
+En cada iteración, el algoritmo considera todos los pacientes cuya cirugía cabe en el tiempo restante de pabellón. Para cada paciente factible, calcula un costo estimado compuesto por:
 
-La prioridad de diagnóstico se define como:
+1. El costo acumulado de los pacientes ya seleccionados.
+2. El riesgo dinámico del paciente si se agenda en la posición actual.
+3. El riesgo estimado de los pacientes que quedarían pendientes después de tomar esa decisión.
+
+El costo usado por el greedy puede describirse como:
 
 ```text
-Tipo A → mayor prioridad, diagnóstico que empeora rápido
-Tipo B → prioridad intermedia
-Tipo C → menor prioridad, diagnóstico que empeora lentamente
+costo_estimado =
+    costo_acumulado
+    + riesgo_del_paciente_agendado_ahora
+    + riesgo_estimado_de_los_pacientes_pendientes
 ```
 
-Luego, el algoritmo recorre la lista ordenada y selecciona a un paciente si su cirugía cabe dentro de las horas restantes de pabellón.
+Luego, el algoritmo selecciona al paciente que produce el menor costo estimado. Este proceso se repite hasta que no queden pacientes factibles o no quede tiempo suficiente de pabellón.
 
 En pseudocódigo:
 
 ```text
-Ordenar pacientes por grupo, tipo de diagnóstico, vulnerabilidad y score dinámico
+Mientras queden pacientes y tiempo disponible:
+    mejor_paciente = ninguno
+    mejor_costo = infinito
 
-Mientras queden pacientes por revisar:
-    tomar el siguiente paciente más prioritario
+    Para cada paciente pendiente:
+        si su cirugía cabe en el tiempo restante:
+            calcular riesgo si se agenda ahora
+            estimar riesgo futuro de los pacientes restantes
+            calcular costo estimado total
 
-    si la duración de su cirugía cabe en el tiempo restante:
-        seleccionar paciente
-        descontar duración de cirugía
+            si costo estimado < mejor_costo:
+                actualizar mejor_paciente
 
-    si no cabe:
-        saltar al siguiente paciente
+    si no existe mejor_paciente:
+        terminar
 
-Finalizar cuando no queden pacientes factibles o no quede tiempo suficiente
+    seleccionar mejor_paciente
+    descontar su duración del tiempo disponible
+    actualizar costo acumulado
 ```
 
-Este enfoque no explora todas las combinaciones posibles de pacientes. En cambio, toma en cada paso la mejor decisión local según el ranking definido. Por eso corresponde a una heurística greedy.
+Este enfoque sigue siendo greedy porque toma una decisión local en cada paso y no explora todas las combinaciones posibles de agenda. Sin embargo, a diferencia de un greedy basado solo en ranking, este criterio intenta aproximar la lógica de minimización del deterioro acumulado usada por wA*.
+
+---
+
+## Manejo de unidades temporales
+
+El score dinámico del paper evoluciona en función de días de espera. Por esta razón, el algoritmo convierte el tiempo quirúrgico acumulado a días equivalentes antes de proyectar el deterioro de los pacientes.
+
+Por defecto se utiliza:
+
+```python
+minutos_por_dia_espera = 480
+```
+
+Esto interpreta una jornada quirúrgica de 8 horas como un día equivalente de espera dentro de la simulación. Esta conversión evita mezclar directamente minutos de cirugía con días de evolución clínica.
+
+---
+
+## Resultado generado
+
+Después de ejecutar el algoritmo greedy, se genera el archivo:
+
+```text
+Greedy/seleccion_greedy.csv
+```
+
+Este archivo contiene la agenda sugerida por el algoritmo greedy para la capacidad de pabellón definida.
 

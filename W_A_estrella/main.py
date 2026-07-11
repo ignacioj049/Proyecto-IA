@@ -1,8 +1,19 @@
 import json
 import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from modelos import Paciente
 from traductor import traducir_valor
 from algoritmo import weighted_a_star
+from config_modelo import PESOS, VARIABLES_DEPENDIENTES_TIEMPO, LAMBDA_POR_TIPO
+
+# Derivar splits estático/dinámico desde la única fuente de verdad.
+COLS_ESTATICAS = [k for k in PESOS if k not in VARIABLES_DEPENDIENTES_TIEMPO]
+COLS_DINAMICAS = [k for k in PESOS if k in VARIABLES_DEPENDIENTES_TIEMPO]
+
+PESOS_ESTATICOS = {k: PESOS[k] for k in COLS_ESTATICAS}
+PESOS_DINAMICOS = {k: PESOS[k] for k in COLS_DINAMICAS}
+
 
 def cargar_datos_simulados(ruta_json: str):
     pacientes_instanciados = []
@@ -10,8 +21,8 @@ def cargar_datos_simulados(ruta_json: str):
         datos = json.load(f)
     for p in datos:
         tiempo_minutos = int(p["duracion_cirugia_horas"] * 60)
-        vars_estaticas = {k: traducir_valor(k, p[k]) for k in ["Jclin", "Tlist", "Dest", "Opat", "Diag", "Ncuid", "Rcuid", "Dtrab", "Acc", "Dtras", "Ccrit"]}
-        vars_dinamicas = {k: traducir_valor(k, p[k]) for k in ["Sever", "Urg", "Tsuen", "Pmcx", "Com", "Lfam", "Hanor", "Olim", "Dolor"]}
+        vars_estaticas = {k: traducir_valor(k, p[k]) for k in COLS_ESTATICAS}
+        vars_dinamicas = {k: traducir_valor(k, p[k]) for k in COLS_DINAMICAS}
         paciente_obj = Paciente(
             id_paciente=p["id_paciente"], tiempo_quirurgico=tiempo_minutos,
             vars_estaticas=vars_estaticas, vars_dinamicas=vars_dinamicas,
@@ -20,71 +31,108 @@ def cargar_datos_simulados(ruta_json: str):
         pacientes_instanciados.append(paciente_obj)
     return pacientes_instanciados
 
+
+def simular_semanas(pacientes, capacidad_quirofano_minutos, peso_w, top_k,
+                     dias_postergacion, n_semanas):
+    """
+    Ejecuta wA* semana a semana: en cada semana arma la agenda con los
+    pacientes disponibles, retira a los agendados de la lista, y avanza
+    +dias_postergacion la espera de los que quedaron pendientes.
+    """
+    pendientes = pacientes
+    historial = []
+
+    for semana in range(1, n_semanas + 1):
+        if not pendientes:
+            print(f"\nTodos los pacientes fueron agendados antes de la semana {semana}.")
+            break
+
+        print(f"\n{'─'*55}")
+        print(f"SEMANA {semana} | Pendientes al inicio: {len(pendientes)}")
+        print(f"{'─'*55}")
+
+        estado_final = weighted_a_star(
+            pacientes_totales=pendientes,
+            capacidad_quirurgica=capacidad_quirofano_minutos,
+            w=peso_w,
+            pesos_estaticos=PESOS_ESTATICOS,
+            pesos_dinamicos=PESOS_DINAMICOS,
+            tasas_lambda=LAMBDA_POR_TIPO,
+            top_k_candidatos=top_k,
+        )
+
+        if estado_final is None:
+            print(f"Semana {semana}: no se encontró solución. Deteniendo simulación.")
+            break
+
+        agenda_semana = estado_final.agenda_parcial
+        agendados_ids = {p.id for p in agenda_semana}
+        tiempo_usado = sum(p.tiempo_quirurgico for p in agenda_semana)
+
+        print(f"Agendados esta semana: {len(agenda_semana)} "
+              f"({tiempo_usado}/{capacidad_quirofano_minutos} min de pabellón usados)")
+        for i, paciente in enumerate(agenda_semana, 1):
+            print(f"  {i:02d}. ID {paciente.id:03d} | Tipo: {paciente.tipo_diag} "
+                  f"| T. Qx: {paciente.tiempo_quirurgico} min "
+                  f"| Días esperando: {paciente.dias_espera_base}")
+
+        # Retirar agendados y avanzar el reloj de los que quedan
+        pendientes = [p for p in pendientes if p.id not in agendados_ids]
+        for p in pendientes:
+            p.dias_espera_base += dias_postergacion
+
+        historial.append({
+            "semana": semana,
+            "agendados": len(agenda_semana),
+            "tiempo_usado_min": tiempo_usado,
+            "pendientes_restantes": len(pendientes),
+        })
+
+    return historial, pendientes
+
+
 def main():
-    print("Iniciando sistema de agenda wA*...")
+    print("Iniciando sistema de agenda wA* (simulación semanal)...")
     ruta_json = "../data/pacientes.json" if not os.path.exists("data/pacientes.json") else "data/pacientes.json"
-    
+
     try:
-        # Cargar datos
         pacientes = cargar_datos_simulados(ruta_json)
         print(f"¡Éxito! Se han cargado {len(pacientes)} pacientes.\n")
-        
-        # Definir parámetros del quirófano 
-        capacidad_quirofano_minutos = 2400 
-        
-        # Definir el peso de relajación (w) para el wA*
-        peso_w = 2.0 
-        
-        print(f"Calculando agenda óptima para {capacidad_quirofano_minutos} minutos con w={peso_w}...")
-        
-        pesos_estaticos = {
-        "Jclin": 0.066, "Tlist": 0.062, "Dest": 0.054, "Opat": 0.047, 
-        "Diag": 0.046, "Ncuid": 0.043, "Rcuid": 0.043, "Dtrab": 0.038, 
-        "Acc": 0.033, "Dtras": 0.028, "Ccrit": 0.023
-} 
-        pesos_dinamicos = {
-        "Sever": 0.081, "Urg": 0.076, "Tsuen": 0.063, "Pmcx": 0.055, 
-        "Com": 0.053, "Lfam": 0.053, "Hanor": 0.052, "Olim": 0.045, "Dolor": 0.040
-}
-        tasas_lambda = {
-        "A": [0.10, 0.20, 0.30, 0.40],
-        "B": [0.20, 0.05, 0.05, 0.00],
-        "C": [0.05, 0.05, 0.10, 0.15]
-} 
-        
-        # Ejecutamos la búsqueda pasando todos los parámetros requeridos
-        estado_final = weighted_a_star(
-            pacientes_totales=pacientes, 
-            capacidad_quirurgica=capacidad_quirofano_minutos, 
-            w=peso_w,
-            pesos_estaticos=pesos_estaticos,
-            pesos_dinamicos=pesos_dinamicos,
-            tasas_lambda=tasas_lambda
-        )
-        
-        if estado_final is None:
-            print("No se encontró una solución válida que cumpla las restricciones.")
-            return
 
-        # 5. Imprimir los resultados en consola
+        # Parámetros del experimento 
+        horas_pabellon = 8
+        dias_laborales_semana = 5
+        capacidad_quirofano_minutos = int(horas_pabellon * 60 * dias_laborales_semana)  # 2400 min/semana
+        peso_w = 2.0
+        top_k = 40
+        dias_postergacion = 7
+        n_semanas = 5
+
+        print(f"Parámetros: horas_pabellon={horas_pabellon}h x {dias_laborales_semana} días "
+            f"= {capacidad_quirofano_minutos} min/semana | w={peso_w} | "
+            f"top_k={top_k} | dias_postergacion={dias_postergacion} | "
+            f"n_semanas={n_semanas}\n")
+
+        historial, pendientes_finales = simular_semanas(
+            pacientes, capacidad_quirofano_minutos, peso_w,
+            top_k, dias_postergacion, n_semanas
+        )
+
+        # Resumen final
         print("\n" + "="*55)
-        print("🏥 ORDEN DE PACIENTES SUGERIDO POR wA* 🏥")
+        print("RESUMEN DE LA SIMULACIÓN wA*")
         print("="*55)
-        
-        tiempo_usado = 0
-        
-        # Extraemos la lista de pacientes del EstadoNodo devuelto
-        agenda_optima = estado_final.agenda_parcial 
-        
-        for i, paciente in enumerate(agenda_optima, 1):
-            tiempo_usado += paciente.tiempo_quirurgico
-            print(f"{i:02d}. Paciente ID: {paciente.id:03d} | Tipo: {paciente.tipo_diag} | T. Qx: {paciente.tiempo_quirurgico} min | T. Acumulado: {tiempo_usado} min")
-            
-        print("-" * 55)
-        print(f"Resumen: Se programaron {len(agenda_optima)} pacientes en la agenda.")
-        print(f"Tiempo total de quirófano utilizado: {tiempo_usado}/{capacidad_quirofano_minutos} minutos.")
+        total_agendados = sum(h["agendados"] for h in historial)
+        print(f"Semanas simuladas: {len(historial)}")
+        print(f"Total pacientes agendados: {total_agendados}/{len(pacientes)}")
+        print(f"Pacientes sin agendar al final: {len(pendientes_finales)}")
+        if pendientes_finales:
+            dias_espera = [p.dias_espera_base for p in pendientes_finales]
+            print(f"Días de espera de los no agendados — "
+                  f"mín: {min(dias_espera)} | máx: {max(dias_espera)} | "
+                  f"promedio: {sum(dias_espera)/len(dias_espera):.1f}")
         print("=" * 55 + "\n")
-        
+
     except FileNotFoundError:
         print(f"Error: No se pudo encontrar el archivo JSON en la ruta: {ruta_json}")
     except Exception as e:

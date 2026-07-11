@@ -45,11 +45,14 @@ from config_modelo import (
     LAMBDA_POR_TIPO,
     DURACION_CIRUGIA_HORAS,
 )
+from scoring import score_estatico, score_dinamico, vulnerabilidad
 
 # NOTA: PESOS, ALPHA, VARIABLES_DEPENDIENTES_TIEMPO, TIPO_DIAGNOSTICO,
 # LAMBDA_POR_TIPO y DURACION_CIRUGIA_HORAS ahora viven en config_modelo.py,
-# para que todo el equipo (generación de datos, Weighted A*, comparación de
-# enfoques) use exactamente los mismos parámetros del modelo.
+# y score_estatico/score_dinamico/vulnerabilidad viven en scoring.py, para
+# que todo el equipo (generación de datos, Greedy, Weighted A*, comparación
+# de enfoques) use exactamente los mismos parámetros y la misma función de
+# riesgo.
 
 # Distribución real de diagnósticos — Tabla 2 del paper (205 pacientes reales)
 CONTEO_DIAGNOSTICOS = {
@@ -70,7 +73,7 @@ CONTEO_DIAGNOSTICOS = {
     "Mucocele frontal":                      1,
     "Septoplastia con apnea":                1,
     "Sinusitis crónica simple":              1,
-    "Apnea obstructiva del sueño":           1,  
+    "Apnea obstructiva del sueño":           1,  # el paper reporta 0; usamos 1
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -125,69 +128,8 @@ def probabilidades_diagnostico():
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 6. MODELO MATEMÁTICO DEL PAPER: SCORE Y VULNERABILIDAD
+#    (implementación única en scoring.py, usada también por Greedy y wA*)
 # ─────────────────────────────────────────────────────────────────────────────
-
-def _alpha_dinamico(alpha_0, tipo_diag, t_dias):
-    """
-    Calcula α̃(t) según la fórmula recursiva de la Sección 3.4.2 del paper:
-
-        α̃(k,h) = (1 + (k/d_h) * λ(h)) * α̃(d_{h-1}, h-1)
-
-    con 4 intervalos: h1=[0,90], h2=(90,180], h3=(180,360], h4=(360,540].
-    """
-    lam = LAMBDA_POR_TIPO[tipo_diag]
-    t = min(t_dias, 540)  # opera hasta 540 días como límite
-
-    if t <= 90:
-        return (1 + (t / 90) * lam[0]) * alpha_0
-    a90 = (1 + lam[0]) * alpha_0
-    if t <= 180:
-        return (1 + ((t - 90) / 90) * lam[1]) * a90
-    a180 = (1 + lam[1]) * a90
-    if t <= 360:
-        return (1 + ((t - 180) / 180) * lam[2]) * a180
-    a360 = (1 + lam[2]) * a180
-    return (1 + ((t - 360) / 180) * lam[3]) * a360
-
-
-def score_estatico(paciente: dict) -> float:
-    """
-    sp — Ecuación (3) del paper: sp = Σ wi * αi,p   (sin componente temporal)
-    """
-    return sum(PESOS[v] * ALPHA[v][paciente[v]] for v in PESOS)
-
-
-def score_dinamico(paciente: dict, dias_extra: int = 0) -> float:
-    """
-    s'p(t) — Sección 3.4.2 del paper:
-        s'p(t) = Σ_{i∈I}  wi  * αi,p          (variables NO dependientes del tiempo)
-               + Σ_{i*∈I*} wi* * αi*,p(j,t)    (variables dependientes del tiempo)
-
-    dias_extra: días adicionales desde hoy (sirve para proyectar el score
-                a futuro, útil para la heurística h(n) del Weighted A*).
-    """
-    t_total = paciente["dias_en_lista"] + dias_extra
-    tipo_diag = TIPO_DIAGNOSTICO[paciente["Diag"]]
-
-    s = 0.0
-    for var, w in PESOS.items():
-        alpha_0 = ALPHA[var][paciente[var]]
-        if var in VARIABLES_DEPENDIENTES_TIEMPO:
-            s += w * _alpha_dinamico(alpha_0, tipo_diag, t_total)
-        else:
-            s += w * alpha_0
-    return s
-
-
-def vulnerabilidad(paciente: dict, dias_extra: int = 0) -> float:
-    """
-    vp(t) — Ecuación (4) del paper: vp(t) = (t - fp) / Jclin_p
-
-    vp < 1 -> no vulnerable | vp = 1 -> levemente vulnerable | vp > 1 -> vulnerable
-    """
-    t_total = paciente["dias_en_lista"] + dias_extra
-    jclin_dias = paciente["Jclin_meses"] * 30.44
-    return t_total / jclin_dias
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -272,7 +214,7 @@ def generar_pacientes(n: int = 200, semilla: int = 42) -> pd.DataFrame:
             "Olim": Olim, "Ncuid": Ncuid, "Rcuid": Rcuid, "Dolor": Dolor,
             "Dtrab": Dtrab, "Acc": Acc, "Dtras": Dtras, "Ccrit": Ccrit,
             "tipo_diagnostico": TIPO_DIAGNOSTICO[diagnostico],
-            # Extensión propia para el Weighted A*:
+            # Extensión propia para el Weighted A* (no viene del paper):
             "duracion_cirugia_horas": DURACION_CIRUGIA_HORAS[diagnostico],
         }
 

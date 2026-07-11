@@ -11,6 +11,12 @@ from Greedy.algoritmo import greedy_priorizacion
 def main():
     df = generar_pacientes(n=200, semilla=42)
 
+    top_k = 40
+    df = df.sort_values(
+        by=["grupo_prioridad", "vulnerabilidad", "score_dinamico"],
+        ascending=[True, False, False],
+    ).head(top_k)
+
     horas_pabellon = 8.0
     dias_postergacion = 7
 
@@ -43,6 +49,7 @@ def main():
     uso_pabellon = horas_usadas / horas_pabellon * 100
 
     print("\nResumen:")
+    print(f"Top K usado: {top_k}")
     print(f"Horas disponibles: {horas_pabellon}")
     print(f"Horas usadas: {horas_usadas:.2f}")
     print(f"Horas restantes: {horas_restantes:.2f}")

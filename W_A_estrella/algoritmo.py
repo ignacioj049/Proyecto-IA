@@ -3,9 +3,8 @@ from typing import List
 from modelos import Paciente, EstadoNodo
 from evaluacion import calcular_g, calcular_h
 
-def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int,
-                    w: float, pesos_estaticos: dict, pesos_dinamicos: dict,
-                    tasas_lambda: dict, top_k_candidatos: int) -> EstadoNodo:
+def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int,w: float, pesos_estaticos: dict,
+                    pesos_dinamicos: dict,tasas_lambda: dict, top_k_candidatos: int = 40, dias_postergacion: int = 7) -> EstadoNodo:
 
     nodo_inicial = EstadoNodo(
         agenda_parcial=[],
@@ -13,13 +12,13 @@ def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int
         tiempo_restante=capacidad_quirurgica,
         tiempo_simulado_actual=0,
         g=0.0,
-        h=calcular_h(pacientes_totales, 0, pesos_estaticos, pesos_dinamicos, tasas_lambda),
+        h=calcular_h(pacientes_totales, pesos_estaticos, pesos_dinamicos, tasas_lambda, dias_postergacion),
         w=w
     )
 
     frontera = []
     heapq.heappush(frontera, nodo_inicial)
-    visitados = {} 
+    visitados = {}
     iteraciones = 0
 
     while frontera:
@@ -42,37 +41,37 @@ def weighted_a_star(pacientes_totales: List[Paciente], capacidad_quirurgica: int
             print(f"\nSolución encontrada en {iteraciones} iteraciones.")
             return nodo_actual
 
+        # Filtrar por "cabe" ANTES de rankear por riesgo (fix del bug anterior)
+        candidatos_que_caben = [
+            p for p in nodo_actual.pacientes_pendientes
+            if p.tiempo_quirurgico <= nodo_actual.tiempo_restante
+        ]
         top_candidatos = sorted(
-            nodo_actual.pacientes_pendientes,
+            candidatos_que_caben,
             key=lambda p: p.obtener_riesgo_total(
-                pesos_estaticos, pesos_dinamicos, nodo_actual.tiempo_simulado_actual, tasas_lambda
+                pesos_estaticos, pesos_dinamicos, dias_extra=0, tasas_lambda=tasas_lambda
             ),
             reverse=True
         )[:top_k_candidatos]
 
         for paciente in top_candidatos:
-            if paciente.tiempo_quirurgico <= nodo_actual.tiempo_restante:
-                nueva_agenda = nodo_actual.agenda_parcial + [paciente]
-                nuevos_pendientes = [p for p in nodo_actual.pacientes_pendientes if p.id != paciente.id]
-                nuevo_tiempo_restante = nodo_actual.tiempo_restante - paciente.tiempo_quirurgico
-                nuevo_tiempo_simulado = nodo_actual.tiempo_simulado_actual + paciente.tiempo_quirurgico
+            nueva_agenda = nodo_actual.agenda_parcial + [paciente]
+            nuevos_pendientes = [p for p in nodo_actual.pacientes_pendientes if p.id != paciente.id]
+            nuevo_tiempo_restante = nodo_actual.tiempo_restante - paciente.tiempo_quirurgico
+            nuevo_tiempo_simulado = nodo_actual.tiempo_simulado_actual + paciente.tiempo_quirurgico
 
-                firma_hija = frozenset(p.id for p in nueva_agenda)
-                nuevo_g = calcular_g(paciente, nodo_actual.g, nuevo_tiempo_simulado,
-                                      pesos_estaticos, pesos_dinamicos, tasas_lambda)
+            firma_hija = frozenset(p.id for p in nueva_agenda)
+            nuevo_g = calcular_g(paciente, nodo_actual.g, pesos_estaticos, pesos_dinamicos, tasas_lambda)
 
-                # No expandir si ya visitamos ese mismo subconjunto con g igual o mejor
-                if firma_hija in visitados and visitados[firma_hija] <= nuevo_g:
-                    continue
+            if firma_hija in visitados and visitados[firma_hija] <= nuevo_g:
+                continue
 
-                nuevo_h = calcular_h(nuevos_pendientes, nuevo_tiempo_simulado,
-                                      pesos_estaticos, pesos_dinamicos, tasas_lambda)
+            nuevo_h = calcular_h(nuevos_pendientes, pesos_estaticos, pesos_dinamicos, tasas_lambda, dias_postergacion)
 
-                heapq.heappush(frontera, EstadoNodo(
-                    agenda_parcial=nueva_agenda, pacientes_pendientes=nuevos_pendientes,
-                    tiempo_restante=nuevo_tiempo_restante, tiempo_simulado_actual=nuevo_tiempo_simulado,
-                    g=nuevo_g, h=nuevo_h, w=w
-                ))
+            heapq.heappush(frontera, EstadoNodo(
+                agenda_parcial=nueva_agenda, pacientes_pendientes=nuevos_pendientes,tiempo_restante=nuevo_tiempo_restante,
+                tiempo_simulado_actual=nuevo_tiempo_simulado, g=nuevo_g, h=nuevo_h, w=w
+            ))
 
         if len(frontera) > 5000:
             frontera = heapq.nsmallest(5000, frontera)

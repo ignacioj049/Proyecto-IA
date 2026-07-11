@@ -59,6 +59,7 @@ def simular_semanas(pacientes, capacidad_quirofano_minutos, peso_w, top_k,
             pesos_dinamicos=PESOS_DINAMICOS,
             tasas_lambda=LAMBDA_POR_TIPO,
             top_k_candidatos=top_k,
+            dias_postergacion=dias_postergacion,
         )
 
         if estado_final is None:
@@ -72,14 +73,19 @@ def simular_semanas(pacientes, capacidad_quirofano_minutos, peso_w, top_k,
         print(f"Agendados esta semana: {len(agenda_semana)} "
               f"({tiempo_usado}/{capacidad_quirofano_minutos} min de pabellón usados)")
         for i, paciente in enumerate(agenda_semana, 1):
-            print(f"  {i:02d}. ID {paciente.id:03d} | Tipo: {paciente.tipo_diag} "
-                  f"| T. Qx: {paciente.tiempo_quirurgico} min "
-                  f"| Días esperando: {paciente.dias_espera_base}")
+            """dias_espera_base: días totales que lleva esperando el paciente (incluye
+            tanto el histórico del dataset como las semanas que fue postergado).
+            dias_pospuestos: cuánto de eso corresponde a postergaciones DENTRO de
+            esta simulación (0 si fue agendado en la primera semana en que apareció)."""
+            
+            print(f"  {i:02d}. ID {paciente.id:03d} | Tipo: {paciente.tipo_diag} " f"| T. Qx: {paciente.tiempo_quirurgico} min "
+                  f"| Días esperando: {paciente.dias_espera_base} " f"| Días extra evaluados: {paciente.dias_pospuestos}")
 
         # Retirar agendados y avanzar el reloj de los que quedan
         pendientes = [p for p in pendientes if p.id not in agendados_ids]
         for p in pendientes:
             p.dias_espera_base += dias_postergacion
+            p.dias_pospuestos += dias_postergacion
 
         historial.append({
             "semana": semana,
@@ -99,7 +105,7 @@ def main():
         pacientes = cargar_datos_simulados(ruta_json)
         print(f"¡Éxito! Se han cargado {len(pacientes)} pacientes.\n")
 
-        # Parámetros del experimento 
+        # Parámetros del experimento
         horas_pabellon = 8
         dias_laborales_semana = 5
         capacidad_quirofano_minutos = int(horas_pabellon * 60 * dias_laborales_semana)  # 2400 min/semana

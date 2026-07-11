@@ -1,6 +1,6 @@
 import pandas as pd
 
-from generar_pacientes import score_dinamico
+from scoring import score_dinamico
 
 
 def _riesgo_paciente(fila: pd.Series, dias_extra: float) -> float:

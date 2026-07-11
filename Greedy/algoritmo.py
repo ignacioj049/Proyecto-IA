@@ -60,8 +60,6 @@ def greedy_priorizacion(
 
     El paciente agendado se evalúa con dias_extra = 0.
     Los pacientes pendientes se evalúan con dias_extra = dias_postergacion.
-
-    Esto evita mezclar minutos de cirugía con días de espera clínica.
     """
 
     pendientes = df.copy()

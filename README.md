@@ -9,9 +9,10 @@ Además, se implementa un enfoque greedy para construir una agenda quirúrgica b
 
 ## Estructura del proyecto
 
-```text
 Proyecto-IA/
 ├── generar_pacientes.py
+├── config_modelo.py
+├── scoring.py
 ├── data/
 │   ├── pacientes.csv
 │   └── pacientes.json
@@ -19,8 +20,17 @@ Proyecto-IA/
 │   ├── algoritmo.py
 │   ├── main.py
 │   └── seleccion_greedy.csv
+├── W_A_estrella/
+│   ├── modelos.py
+│   ├── traductor.py
+│   ├── algoritmo.py
+│   ├── evaluacion.py
+│   └── main.py
+├── Evaluacion/
+│   ├── evaluacion_comparativa.py
+│   ├── tabla_comparativa.csv
+│   └── tabla_comparativa.md
 └── README.md
-```
 
 ---
 
@@ -169,15 +179,17 @@ Este enfoque sigue siendo greedy porque toma una decisión local en cada paso y 
 
 ## Manejo de unidades temporales
 
-El score dinámico del paper evoluciona en función de días de espera. Por esta razón, el algoritmo convierte el tiempo quirúrgico acumulado a días equivalentes antes de proyectar el deterioro de los pacientes.
+El score dinámico del paper evoluciona en función de días de espera.El algoritmo evalúa el riesgo de cada paciente usando dias_extra (días adicionales de espera clínica) directamente, sin convertir minutos de pabellón a días:
 
-Por defecto se utiliza:
+* el paciente que se agenda en el paso actual se evalúa con dias_extra = 0
+* los pacientes que quedan pendientes se evalúan con dias_extra = dias_postergacion (por defecto 7: "Si no se agenda ahora, esperará una semana más")
+
 
 ```python
-minutos_por_dia_espera = 480
+dias_postergación  = 7
 ```
 
-Esto interpreta una jornada quirúrgica de 8 horas como un día equivalente de espera dentro de la simulación. Esta conversión evita mezclar directamente minutos de cirugía con días de evolución clínica.
+Esto reemplaza el enfoque anterior (que convertía minutos de pabellón acumulados a días de espera vía minutos_por_dia_espera) por un criterio más simple y, sobre todo, consistente entre Greedy y Weighted A*: ambos algoritmos usan ahora exactamente el mismo criterio de dias_extra para proyectar el deterioro de los pacientes.
 
 ---
 
@@ -191,3 +203,75 @@ Greedy/seleccion_greedy.csv
 
 Este archivo contiene la agenda sugerida por el algoritmo greedy para la capacidad de pabellón definida.
 
+## Módulo común de scoring
+Para que Greedy y Weighted A* jerarquicen a los pacientes de forma consistente, ambos algoritmos calculan el riesgo usando exactamente las mismas fórmulas y los mismos parámetros del modelo del paper:
+* config_modelo.py centraliza los pesos wi, los valores alpha por categoría, la clasificación de diagnósticos en tipos A/B/C y los factores de empeoramiento lambda.
+
+* scoring.py implementa score_estatico, score_dinamico, vulnerabilidad y alpha_dinamico una única vez.
+
+Ni Greedy ni Weighted A* deben reimplementar estas fórmulas ya que ambos importan desde estos dos archivos.
+
+## Weighted A* (W_A_estrella/)
+
+Implementa una búsqueda informada Weighted A* (f(n) = g(n) + w·h(n)) donde:
+
+
+* g(n): riesgo real acumulado de los pacientes ya agendados en la agenda
+parcial (evaluados con dias_extra=0).
+* h(n): heurística — riesgo estimado de los pacientes pendientes si quedan
+sin agendar dias_postergacion días más (por defecto 7).
+* En cada nodo solo se expanden los top_k_candidatos pacientes pendientes
+que caben en el tiempo restante y que tienen mayor riesgo actual (poda
+de la rama de búsqueda), y se descartan estados repetidos (mismo
+subconjunto de pacientes agendados) que ya fueron visitados con un g
+igual o mejor.
+
+
+Por defecto, W_A_estrella/main.py corre una sola pasada (n_semanas = 1,
+capacidad de un bloque de pabellón de 8h). También soporta simular varias
+semanas seguidas (reinyectando a los pacientes no agendados con más días de
+espera), pero para comparar contra Greedy en igualdad de condiciones se usa el
+modo de una sola pasada.
+
+
+## Preselección común de candidatos (top_k = 40)
+
+Tanto Greedy/main.py como W_A_estrella/main.py aplican el mismo
+preprocesamiento antes de correr su algoritmo: ordenan a todos los pacientes
+por grupo_prioridad (ascendente), vulnerabilidad (descendente) y
+score_dinamico (descendente), y se quedan con los primeros top_k = 40.
+Esto asegura que ambos algoritmos compitan por agendar exactamente el mismo
+subconjunto de 40 pacientes más prioritarios, en vez de que cada uno decida
+sobre los 200 pacientes completos.
+
+## Evaluación comparativa Greedy vs Weighted A* (Evaluacion/)
+
+Evaluacion/evaluacion_comparativa.py es el script de evaluación común del proyecto. Ejecuta ambos algoritmos bajo condiciones idénticas para que la comparación sea válida:
+
+* mismo dataset (generar_pacientes(n = 200, semilla=42)),
+* mismo top_k (aplicado una sola vez, compartido por ambos algoritmos, replicando el criterio de ordenamiento de cada main.py),
+* misma capacidad de pabellón (8hrs /480min),
+* mismo dias_postergacion (7)
+* mismos pesos/alphas/lambdas (ambos algoritmos ya usan config_modelo.py y scoring.py),
+* ambos en modo "una sola pasada" (un único bloque de pabellón)
+
+Para ejecutarlo, desde la raíz del proyecto:
+
+``` bash 
+python Evaluacion/evaluacion_comparativa.py
+
+```
+Métricas medidas para cada algoritmo:
+
+* tiempo de ejecución (segundos),
+* pacientes seleccionados/agendados,
+* horas usadas y horas restantes de pabellón,
+* costo total real de la agenda (suma del riesgo dinámico de los pacientes efectivamente agendados, evaluado con dias_extra = 0)
+
+La tabla comparativa se guarda en:
+
+```text
+Evaluación/tabla_comparativa.csv
+Evaluacion/tabla_comparativa.md
+```
+ 

@@ -9,6 +9,7 @@ Además, se implementa un enfoque greedy para construir una agenda quirúrgica b
 
 ## Estructura del proyecto
 
+```text
 Proyecto-IA/
 ├── generar_pacientes.py
 ├── config_modelo.py
@@ -31,7 +32,7 @@ Proyecto-IA/
 │   ├── tabla_comparativa.csv
 │   └── tabla_comparativa.md
 └── README.md
-
+```
 ---
 
 ## Dependencias

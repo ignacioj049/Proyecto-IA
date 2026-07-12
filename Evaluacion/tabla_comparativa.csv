@@ -1,0 +1,3 @@
+﻿algoritmo,tiempo_ejecucion_seg,pacientes_seleccionados,horas_usadas,horas_restantes,costo_total_agenda,pacientes_agendados
+Greedy,1.444,7,7.5,0.5,3.0173,7
+Weighted A*,0.0956,7,7.4,0.6,4.0249,7

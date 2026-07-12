@@ -15,20 +15,39 @@ PESOS_ESTATICOS = {k: PESOS[k] for k in COLS_ESTATICAS}
 PESOS_DINAMICOS = {k: PESOS[k] for k in COLS_DINAMICAS}
 
 
-def cargar_datos_simulados(ruta_json: str):
+def cargar_datos_simulados(ruta_json: str, top_k: int | None = None):
     pacientes_instanciados = []
+
     with open(ruta_json, 'r', encoding='utf-8') as f:
         datos = json.load(f)
+
+    if top_k is not None:
+        datos = sorted(
+            datos,
+            key=lambda p: (
+                p["grupo_prioridad"],
+                -p["vulnerabilidad"],
+                -p["score_dinamico"],
+            )
+        )[:top_k]
+
     for p in datos:
         tiempo_minutos = int(p["duracion_cirugia_horas"] * 60)
+
         vars_estaticas = {k: traducir_valor(k, p[k]) for k in COLS_ESTATICAS}
         vars_dinamicas = {k: traducir_valor(k, p[k]) for k in COLS_DINAMICAS}
+
         paciente_obj = Paciente(
-            id_paciente=p["id_paciente"], tiempo_quirurgico=tiempo_minutos,
-            vars_estaticas=vars_estaticas, vars_dinamicas=vars_dinamicas,
-            tipo_diag=p["tipo_diagnostico"], dias_espera_base=p["dias_en_lista"]
+            id_paciente=p["id_paciente"],
+            tiempo_quirurgico=tiempo_minutos,
+            vars_estaticas=vars_estaticas,
+            vars_dinamicas=vars_dinamicas,
+            tipo_diag=p["tipo_diagnostico"],
+            dias_espera_base=p["dias_en_lista"],
         )
+
         pacientes_instanciados.append(paciente_obj)
+
     return pacientes_instanciados
 
 
@@ -98,45 +117,46 @@ def simular_semanas(pacientes, capacidad_quirofano_minutos, peso_w, top_k,
 
 
 def main():
-    print("Iniciando sistema de agenda wA* (simulación semanal)...")
+    print("Iniciando sistema de agenda wA*...")
     ruta_json = "../data/pacientes.json" if not os.path.exists("data/pacientes.json") else "data/pacientes.json"
 
     try:
-        pacientes = cargar_datos_simulados(ruta_json)
-        print(f"¡Éxito! Se han cargado {len(pacientes)} pacientes.\n")
-
         # Parámetros del experimento
         horas_pabellon = 8
-        dias_laborales_semana = 5
-        capacidad_quirofano_minutos = int(horas_pabellon * 60 * dias_laborales_semana)  # 2400 min/semana
+        capacidad_quirofano_minutos = int(horas_pabellon * 60)
         peso_w = 2.0
         top_k = 40
         dias_postergacion = 7
-        n_semanas = 5
+        n_semanas = 1
 
-        print(f"Parámetros: horas_pabellon={horas_pabellon}h x {dias_laborales_semana} días "
-            f"= {capacidad_quirofano_minutos} min/semana | w={peso_w} | "
+        pacientes = cargar_datos_simulados(ruta_json, top_k=top_k)
+        print(f"¡Éxito! Se han cargado {len(pacientes)} pacientes del top {top_k}.\n")
+
+        print(
+            f"Parámetros: horas_pabellon={horas_pabellon}h "
+            f"= {capacidad_quirofano_minutos} min | w={peso_w} | "
             f"top_k={top_k} | dias_postergacion={dias_postergacion} | "
-            f"n_semanas={n_semanas}\n")
-
-        historial, pendientes_finales = simular_semanas(
-            pacientes, capacidad_quirofano_minutos, peso_w,
-            top_k, dias_postergacion, n_semanas
+            f"n_semanas={n_semanas}\n"
         )
 
-        # Resumen final
-        print("\n" + "="*55)
+        historial, pendientes_finales = simular_semanas(
+            pacientes,
+            capacidad_quirofano_minutos,
+            peso_w,
+            top_k,
+            dias_postergacion,
+            n_semanas,
+        )
+
+        print("\n" + "=" * 55)
         print("RESUMEN DE LA SIMULACIÓN wA*")
-        print("="*55)
+        print("=" * 55)
         total_agendados = sum(h["agendados"] for h in historial)
+        print(f"Top K usado: {top_k}")
+        print(f"Capacidad usada: {capacidad_quirofano_minutos} min")
         print(f"Semanas simuladas: {len(historial)}")
         print(f"Total pacientes agendados: {total_agendados}/{len(pacientes)}")
         print(f"Pacientes sin agendar al final: {len(pendientes_finales)}")
-        if pendientes_finales:
-            dias_espera = [p.dias_espera_base for p in pendientes_finales]
-            print(f"Días de espera de los no agendados — "
-                  f"mín: {min(dias_espera)} | máx: {max(dias_espera)} | "
-                  f"promedio: {sum(dias_espera)/len(dias_espera):.1f}")
         print("=" * 55 + "\n")
 
     except FileNotFoundError:

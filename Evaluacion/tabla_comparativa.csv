@@ -1,3 +1,4 @@
-﻿algoritmo,tiempo_ejecucion_seg,pacientes_seleccionados,horas_usadas,horas_restantes,costo_total_agenda,pacientes_agendados
-Greedy,1.444,7,7.5,0.5,3.0173,7
-Weighted A*,0.0956,7,7.4,0.6,4.0249,7
+﻿algoritmo,promedio_dias_espera_al_agendar,pacientes_vulnerables_sin_operar,tiempo_computo_total_seg,tiempo_computo_promedio_seg_por_semana,semanas_ejecutadas,pacientes_agendados,pacientes_pendientes_final
+FIFO,204.925,0,0.9583663000084925,0.033047113793396296,29,200,0
+Greedy (paper),206.43,0,2.060548000066774,0.07105337931264738,29,200,0
+Weighted A*,205.24,0,11.892642499966314,0.41009112068849357,29,200,0

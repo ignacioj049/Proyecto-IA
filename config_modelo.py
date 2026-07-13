@@ -173,3 +173,37 @@ DURACION_CIRUGIA_HORAS = {
     "Otitis media con efusión":             0.6,
     "Apnea obstructiva del sueño":          1.4,
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 5. PESO DE LA VULNERABILIDAD vp(t) EN EL COSTO DE wA* (NO viene del paper)
+# ─────────────────────────────────────────────────────────────────────────────
+# El paper define vp(t) = (t - fp) / Jclin_p (Ecuación 4) como una métrica de
+# reporte, pero no especifica cómo debería incorporarse a una función de costo
+# de búsqueda. Antes de este cambio, Weighted A* (g(n) = costo agenda, h(n) =
+# costo pendientes) solo usaba sp/s'p (score estático + dinámico, scoring.py),
+# por lo que la búsqueda optimizaba severidad clínica general pero era
+# completamente ciega a qué tan cerca o sobrepasado está un paciente de su
+# propio plazo clínico máximo (Jclin_p). Esto es justamente lo que vp(t) mide.
+#
+# PESO_VULNERABILIDAD pondera vp(t) dentro del riesgo total de cada paciente
+# (ver Paciente.obtener_riesgo_total en modelos.py):
+#
+#   riesgo_total = s_estatico + s_dinamico + PESO_VULNERABILIDAD * min(vp(t), VP_TOPE)
+#
+# Valor de referencia: sp/s'p vive aproximadamente en el rango [0.05, 1.5]
+# (los 19 pesos wi suman 1.0 y los alpha van de 0 a ~0.94, con el boost de
+# alpha_dinamico incluido). vp(t) en cambio no tiene techo natural: un
+# paciente que lleva 600 días en lista con Jclin=2 meses (~61 días) tiene
+# vp(t) ≈ 9.8. Con PESO_VULNERABILIDAD=0.15 ese paciente suma ~1.47 de riesgo
+# extra por vulnerabilidad, un aporte del mismo orden de magnitud que el score
+# clínico completo — suficiente para influir fuertemente en la elección sin
+# que un solo caso extremo aplaste por completo al resto de las variables.
+PESO_VULNERABILIDAD = 0.30
+
+# VP_TOPE acota vp(t) ANTES de ponderarlo. Sin este tope, un paciente con
+# Jclin_p muy chico y espera muy larga (caso extremo, pero real en los datos:
+# se observaron esperas de hasta 631 días durante la simulación) generaría un
+# vp(t) desproporcionado que dominaría por completo el costo de la agenda,
+# forzando a agendarlo siempre primero sin importar el resto del score.
+# 5.0 = "5 veces el tiempo máximo clínico recomendado para ese paciente".
+VP_TOPE = 5.0

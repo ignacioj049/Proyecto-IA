@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.append(str(ROOT))
 
 from generar_pacientes import generar_pacientes
-from Greedy.algoritmo import greedy_priorizacion
+from FIFO.algoritmo import fifo_priorizacion
 from simulacion import simular_semanas_df
 
 
@@ -15,36 +15,34 @@ def main():
     df = generar_pacientes(n=200, semilla=42)
 
     horas_pabellon = 8.0
-    top_k_candidatos = 40
     dias_postergacion = 7
     n_semanas = 60  # tope de seguridad
 
     def seleccionar_semana(df_candidatos, horas_disponibles, dias_postergacion):
-        return greedy_priorizacion(
+        return fifo_priorizacion(
             df_candidatos,
             horas_disponibles=horas_disponibles,
             dias_postergacion=dias_postergacion,
         )
 
-    print("Iniciando simulación Greedy (costo acumulado) multi-semana...")
+    print("Iniciando simulación FIFO multi-semana (baseline ingenuo)...")
     print(f"Parámetros: horas_pabellon={horas_pabellon}h | "
-          f"top_k_candidatos={top_k_candidatos} | dias_postergacion={dias_postergacion} | "
-          f"n_semanas(tope)={n_semanas}\n")
+          f"dias_postergacion={dias_postergacion} | n_semanas(tope)={n_semanas}\n")
 
+    
     historial, pendientes_finales, metricas = simular_semanas_df(
         df,
         seleccionar_semana,
         horas_pabellon=horas_pabellon,
         dias_postergacion=dias_postergacion,
         n_semanas=n_semanas,
-        top_k_candidatos=top_k_candidatos,
-        nombre_algoritmo="Greedy (costo acumulado)",
+        top_k_candidatos=None,
+        nombre_algoritmo="FIFO",
     )
 
     print("\n" + "=" * 55)
-    print("RESUMEN DE LA SIMULACIÓN GREEDY (costo acumulado)")
+    print("RESUMEN DE LA SIMULACIÓN FIFO")
     print("=" * 55)
-    print(f"top_k_candidatos usado por semana: {top_k_candidatos}")
     print(f"Semanas simuladas: {metricas['semanas_ejecutadas']}")
     print(f"Total pacientes agendados: {metricas['pacientes_agendados']}/{len(df)}")
     print(f"Pacientes sin agendar al final: {metricas['pacientes_pendientes_final']}")
@@ -55,9 +53,8 @@ def main():
           f"({metricas['tiempo_computo_promedio_seg_por_semana']:.3f}s/semana en promedio)")
     print("=" * 55 + "\n")
 
-    salida = Path(__file__).resolve().parent / "seleccion_greedy.csv"
-    pd_historial_cols = ["semana", "agendados", "pendientes_restantes", "tiempo_seg"]
-    pd.DataFrame(historial)[pd_historial_cols].to_csv(salida, index=False, encoding="utf-8-sig")
+    salida = Path(__file__).resolve().parent / "seleccion_fifo.csv"
+    pd.DataFrame(historial).to_csv(salida, index=False, encoding="utf-8-sig")
     print(f"Historial semanal guardado en: {salida}")
 
 

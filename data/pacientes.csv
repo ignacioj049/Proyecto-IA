@@ -1,0 +1,201 @@
+﻿id_paciente,edad,genero,tipo_paciente,dias_en_lista,Jclin_meses,Sever,Urg,Jclin,Tsuen,Tlist,Pmcx,Dest,Com,Lfam,Hanor,Opat,Diag,Olim,Ncuid,Rcuid,Dolor,Dtrab,Acc,Dtras,Ccrit,tipo_diagnostico,duracion_cirugia_horas,score_estatico,score_dinamico,vulnerabilidad,grupo_prioridad
+1,45,M,en tratamiento,10,21,alta,7,VI,bajo,0-3,alta,NA,media,sí,alta presencia,0,Desviación septal sin apnea,severa,no,no,5,no,urbano,no,no,C,1.2,0.2654,0.27,0.0156,4
+2,61,F,en tratamiento,9,15,media,7,V,severo,0-3,media,NA,media,sí,baja presencia,0,Amigdalitis crónica o recurrente,no,no,no,6,sí,rural,no,no,C,0.8,0.2608,0.2641,0.0197,4
+3,13,M,en tratamiento,42,11,baja,8,IV,medio,0-3,alta,no,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,7,NA,rural,no,no,A,1.0,0.1648,0.1958,0.1254,4
+4,1,M,en tratamiento,243,5,media,2,II,bajo,7-9,alta,sí,media,sí,alta presencia,0,Amigdalitis crónica o recurrente,media,no,no,8,NA,urbano,no,no,C,0.8,0.2756,0.346,1.5966,1
+5,5,F,en tratamiento,24,2,alta,5,I,bajo,0-3,alta,sí,alta,sí,baja presencia,0,Amigdalitis crónica o recurrente,severa,sí,no,7,NA,urbano,no,no,C,0.8,0.3561,0.3694,0.3942,2
+6,10,F,nuevo,259,11,alta,5,IV,medio,7-9,alta,sí,baja,no,baja presencia,0,Obstrucción de conductos lagrimales,media,sí,no,5,NA,rural,no,no,C,0.7,0.2901,0.3539,0.7735,2
+7,20,M,en tratamiento,167,8,baja,6,III,severo,4-6,alta,NA,media,no,sin presencia,0,Amigdalitis crónica o recurrente,media,sí,no,5,sí,rural,no,sí,C,0.8,0.2609,0.2961,0.6858,4
+8,28,F,en tratamiento,161,11,media,1,IV,bajo,4-6,alta,NA,alta,sí,baja presencia,II,Hipertrofia de amígdalas y adenoides,media,sí,no,6,NA,alta ruralidad,no,no,A,1.0,0.2751,0.4283,0.4808,2
+9,60,F,en tratamiento,270,2,alta,5,I,medio,7-9,media,NA,alta,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,sí,sí,3,no,alta ruralidad,no,no,A,1.0,0.3009,0.4875,4.435,1
+10,4,M,en tratamiento,248,15,baja,6,V,medio,7-9,media,sí,alta,sí,baja presencia,I,Hipertrofia de amígdalas y adenoides,no,no,no,2,NA,alta ruralidad,no,no,A,1.0,0.2562,0.4741,0.5431,2
+11,72,M,en tratamiento,52,54,baja,5,IX,medio,0-3,alta,NA,alta,sí,baja presencia,I,Desviación septal sin apnea,no,no,no,2,NA,alta ruralidad,no,no,C,1.2,0.2146,0.2318,0.0316,4
+12,14,M,en tratamiento,256,5,media,4,II,medio,7-9,alta,sí,baja,no,sin presencia,0,Desviación septal sin apnea,no,sí,sí,8,NA,urbano,sí,no,C,1.2,0.2878,0.3339,1.682,1
+13,0,M,nuevo,193,5,alta,5,II,medio,7-9,alta,sí,alta,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,4,NA,urbano,no,no,A,1.0,0.3065,0.5619,1.2681,1
+14,1,F,nuevo,130,21,alta,8,VI,medio,4-6,alta,no,baja,sí,baja presencia,0,Obstrucción de conductos lagrimales,severa,sí,no,6,NA,urbano,no,no,C,0.7,0.2915,0.3404,0.2034,2
+15,12,M,en tratamiento,71,30,media,9,VII,medio,0-3,media,sí,media,no,alta presencia,0,Amigdalitis crónica o recurrente,severa,no,no,6,NA,alta ruralidad,sí,no,C,0.8,0.2789,0.3088,0.0777,4
+16,20,M,en tratamiento,186,21,baja,9,VI,medio,7-9,alta,sí,alta,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,2,no,rural,no,no,A,1.0,0.2525,0.4485,0.291,2
+17,16,F,en tratamiento,65,8,baja,7,III,medio,0-3,alta,sí,media,sí,alta presencia,I,Hipertrofia de amígdalas y adenoides,media,no,no,5,NA,urbano,no,no,A,1.0,0.2776,0.3712,0.2669,2
+18,18,F,en tratamiento,79,42,alta,7,VIII,bajo,0-3,alta,NA,media,sí,sin presencia,0,Amigdalitis crónica o recurrente,media,no,no,0,sí,alta ruralidad,no,no,C,0.8,0.2665,0.2957,0.0618,4
+19,3,F,en tratamiento,170,11,baja,10,IV,medio,4-6,baja,NA,alta,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,no,sí,sí,7,NA,urbano,no,no,A,1.0,0.1988,0.2763,0.5077,4
+20,49,M,en tratamiento,187,15,alta,7,V,severo,7-9,baja,NA,baja,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,sí,sí,7,no,alta ruralidad,no,no,A,1.0,0.2781,0.4203,0.4095,2
+21,1,F,nuevo,79,2,media,2,I,severo,0-3,alta,no,alta,no,baja presencia,0,Colesteatoma del oído,no,no,no,9,NA,urbano,no,no,B,2.5,0.2097,0.2538,1.2976,3
+22,13,F,nuevo,7,11,media,5,IV,medio,0-3,media,sí,media,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,1,NA,rural,no,no,A,1.0,0.2477,0.2564,0.0209,4
+23,27,M,en tratamiento,84,8,alta,5,III,medio,0-3,alta,NA,alta,sí,baja presencia,0,Perforación timpánica,severa,sí,no,5,sí,urbano,no,no,C,1.0,0.3513,0.3918,0.3449,2
+24,5,M,en tratamiento,264,2,alta,5,I,medio,7-9,media,no,media,sí,alta presencia,IV,Hipertrofia de amígdalas y adenoides,severa,no,sí,5,NA,urbano,no,no,A,1.0,0.3223,0.579,4.3364,1
+25,5,M,en tratamiento,169,2,alta,10,I,medio,4-6,media,NA,baja,sí,alta presencia,0,Septoplastia con apnea,media,no,sí,3,NA,urbano,no,no,A,1.5,0.2834,0.4641,2.776,1
+26,16,M,en tratamiento,95,15,alta,7,V,bajo,4-6,media,no,media,no,baja presencia,I,Obstrucción de conductos lagrimales,media,no,no,7,NA,urbano,no,no,C,0.7,0.1867,0.2141,0.2081,4
+27,18,M,en tratamiento,19,2,media,5,I,bajo,0-3,alta,no,media,no,baja presencia,0,Sinusitis crónica complicada,no,no,no,4,no,alta ruralidad,no,no,B,2.0,0.1773,0.1847,0.3121,4
+28,87,F,en tratamiento,109,11,media,6,IV,severo,4-6,alta,NA,baja,sí,baja presencia,I,Hipertrofia de amígdalas y adenoides,media,no,no,2,NA,alta ruralidad,no,sí,A,1.0,0.2554,0.377,0.3255,2
+29,48,M,en tratamiento,329,5,alta,1,II,bajo,10-12,media,sí,media,sí,baja presencia,I,Otitis media complicada,severa,no,no,7,sí,urbano,no,no,B,1.5,0.3264,0.4616,2.1616,1
+30,1,M,en tratamiento,19,30,alta,5,VII,bajo,0-3,alta,no,media,no,sin presencia,I,Desviación septal sin apnea,no,no,sí,2,NA,urbano,sí,no,C,1.2,0.2249,0.2299,0.0208,4
+31,19,F,en tratamiento,49,2,alta,6,I,bajo,0-3,baja,NA,baja,no,sin presencia,0,Perforación timpánica,media,no,sí,5,NA,urbano,no,no,C,1.0,0.1748,0.1843,0.8049,4
+32,67,F,en tratamiento,140,5,media,4,II,bajo,4-6,alta,NA,baja,no,baja presencia,I,Perforación timpánica,severa,no,no,5,NA,rural,sí,no,C,1.0,0.1955,0.2239,0.9198,4
+33,19,M,en tratamiento,79,42,media,1,VIII,bajo,0-3,baja,sí,baja,sí,sin presencia,0,Pólipo nasal con apnea,media,sí,no,5,sí,urbano,no,no,A,1.3,0.2587,0.333,0.0618,2
+34,14,M,nuevo,7,5,media,6,II,medio,0-3,alta,sí,alta,sí,sin presencia,0,Colesteatoma del oído,media,no,sí,6,NA,urbano,no,no,B,2.5,0.3162,0.3217,0.046,4
+35,5,M,nuevo,7,2,media,1,I,medio,0-3,media,sí,media,no,baja presencia,I,Sinusitis crónica complicada,no,no,sí,8,NA,alta ruralidad,no,no,B,2.0,0.2594,0.2631,0.115,4
+36,20,F,en tratamiento,71,5,alta,6,II,medio,0-3,media,no,baja,no,sin presencia,0,Otitis media complicada,no,no,no,3,no,urbano,sí,no,B,1.5,0.1797,0.2069,0.4665,4
+37,33,M,en tratamiento,7,11,baja,10,IV,bajo,0-3,alta,NA,alta,no,baja presencia,0,Sinusitis crónica simple,media,no,sí,1,no,urbano,no,no,C,1.3,0.2032,0.205,0.0209,4
+38,8,F,en tratamiento,140,15,alta,6,V,severo,4-6,media,NA,media,sí,sin presencia,I,Amigdalitis crónica o recurrente,media,no,sí,5,NA,alta ruralidad,sí,no,C,0.8,0.3221,0.3708,0.3066,2
+39,6,F,en tratamiento,391,5,alta,8,II,medio,13-18,alta,no,media,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,8,NA,urbano,no,no,A,1.0,0.2712,0.5857,2.569,1
+40,12,F,en tratamiento,104,8,alta,6,III,medio,4-6,alta,no,media,sí,sin presencia,0,Amigdalitis crónica o recurrente,media,no,sí,3,NA,urbano,no,no,C,0.8,0.2804,0.3201,0.4271,4
+41,59,M,en tratamiento,56,2,media,4,I,medio,0-3,alta,NA,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,4,NA,urbano,sí,no,A,1.0,0.2028,0.2509,0.9198,4
+42,10,F,nuevo,160,5,media,3,II,bajo,4-6,alta,no,media,sí,baja presencia,0,Obstrucción de conductos lagrimales,media,no,sí,5,NA,alta ruralidad,sí,no,C,0.7,0.2847,0.328,1.0512,1
+43,9,F,nuevo,10,30,media,7,VII,severo,0-3,media,no,media,sí,sin presencia,0,Amigdalitis crónica o recurrente,no,no,no,9,NA,urbano,no,no,C,0.8,0.2068,0.2103,0.011,4
+44,4,M,en tratamiento,236,5,media,6,II,bajo,7-9,baja,no,baja,sí,alta presencia,0,Amigdalitis crónica o recurrente,media,no,no,6,NA,rural,no,no,C,0.8,0.1927,0.2353,1.5506,3
+45,5,F,en tratamiento,18,15,alta,7,V,medio,0-3,media,sí,alta,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,no,sí,sí,10,NA,rural,no,no,A,1.0,0.3729,0.4011,0.0394,2
+46,71,M,en tratamiento,59,42,media,6,VIII,bajo,0-3,media,NA,media,sí,alta presencia,0,Amigdalitis crónica o recurrente,media,no,sí,8,NA,alta ruralidad,no,no,C,0.8,0.2571,0.2775,0.0461,4
+47,41,M,en tratamiento,191,11,alta,5,IV,bajo,7-9,media,sí,media,sí,sin presencia,0,Amígdalas obstructivas con apnea,media,sí,no,7,NA,urbano,no,no,A,1.2,0.2983,0.5118,0.5704,2
+48,4,M,nuevo,80,8,alta,4,III,medio,0-3,alta,no,media,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,10,NA,rural,no,no,A,1.0,0.2519,0.3525,0.3285,2
+49,77,F,en tratamiento,8,5,alta,5,II,severo,0-3,alta,NA,alta,sí,alta presencia,I,Perforación timpánica,severa,no,sí,7,NA,urbano,no,no,C,1.0,0.3612,0.3657,0.0526,2
+50,14,M,en tratamiento,101,21,baja,5,VI,severo,4-6,media,sí,alta,no,sin presencia,0,Colesteatoma del oído,severa,no,no,3,NA,urbano,sí,no,B,2.5,0.2476,0.3095,0.158,4
+51,47,M,en tratamiento,19,8,alta,3,III,medio,0-3,alta,NA,media,no,baja presencia,III,Desviación septal sin apnea,severa,no,no,6,sí,urbano,no,no,C,1.2,0.2628,0.2697,0.078,4
+52,12,F,en tratamiento,134,21,media,7,VI,medio,4-6,alta,sí,baja,sí,alta presencia,0,Otitis media complicada,no,no,no,6,NA,urbano,no,no,B,1.5,0.2612,0.3504,0.2096,2
+53,52,M,nuevo,144,2,media,8,I,bajo,4-6,alta,NA,baja,sí,alta presencia,0,Colesteatoma del oído,severa,no,sí,6,sí,urbano,sí,no,B,2.5,0.3245,0.4026,2.3653,1
+54,52,M,en tratamiento,71,30,media,5,VII,severo,0-3,alta,NA,baja,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,7,sí,rural,no,no,A,1.0,0.2506,0.3102,0.0777,4
+55,8,M,en tratamiento,52,8,media,4,III,bajo,0-3,alta,sí,media,no,sin presencia,0,Obstrucción de conductos lagrimales,media,no,no,8,NA,alta ruralidad,sí,no,C,0.7,0.2379,0.255,0.2135,4
+56,7,F,en tratamiento,51,8,baja,4,III,bajo,0-3,media,no,alta,sí,baja presencia,0,Desviación septal sin apnea,no,no,no,5,NA,urbano,sí,no,C,1.2,0.1962,0.2103,0.2094,4
+57,3,F,nuevo,128,72,alta,6,X,bajo,4-6,media,sí,media,sí,alta presencia,0,Obstrucción de conductos lagrimales,severa,no,no,3,NA,urbano,no,no,C,0.7,0.2917,0.3491,0.0584,2
+58,4,M,en tratamiento,35,8,media,5,III,medio,0-3,alta,sí,alta,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,6,NA,urbano,no,no,A,1.0,0.2979,0.3454,0.1437,2
+59,3,M,en tratamiento,45,5,media,7,II,severo,0-3,alta,no,media,sí,baja presencia,0,Amigdalitis crónica o recurrente,severa,sí,no,5,NA,rural,sí,no,C,0.8,0.3335,0.354,0.2957,2
+60,41,F,en tratamiento,7,30,alta,5,VII,bajo,0-3,alta,NA,baja,no,sin presencia,I,Amigdalitis crónica o recurrente,media,sí,no,6,NA,urbano,sí,no,C,0.8,0.2215,0.2233,0.0077,4
+61,50,F,en tratamiento,50,8,media,5,III,bajo,0-3,alta,NA,alta,no,sin presencia,0,Mucocele frontal,severa,sí,no,0,sí,rural,sí,no,B,1.8,0.275,0.2975,0.2053,4
+62,15,F,en tratamiento,68,42,media,2,VIII,medio,0-3,alta,sí,alta,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,7,NA,alta ruralidad,sí,no,A,1.0,0.3121,0.4138,0.0532,2
+63,35,M,en tratamiento,325,2,alta,3,I,severo,10-12,media,NA,media,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,sí,5,NA,urbano,no,no,A,1.0,0.3531,0.6448,5.3384,1
+64,36,F,en tratamiento,299,8,baja,8,III,medio,10-12,alta,NA,alta,sí,baja presencia,0,Obstrucción de conductos lagrimales,media,sí,no,5,sí,alta ruralidad,no,no,C,0.7,0.314,0.3743,1.2278,1
+65,1,M,en tratamiento,44,54,media,9,IX,bajo,0-3,baja,no,baja,sí,sin presencia,0,Otitis media con efusión,media,no,no,9,NA,alta ruralidad,no,no,B,0.6,0.1677,0.1854,0.0268,4
+66,11,M,en tratamiento,48,8,media,7,III,bajo,0-3,media,NA,media,sí,baja presencia,0,Amigdalitis crónica o recurrente,media,sí,no,7,NA,urbano,no,no,C,0.8,0.234,0.2493,0.1971,4
+67,14,F,en tratamiento,77,5,baja,6,II,medio,0-3,baja,no,alta,no,baja presencia,I,Amigdalitis crónica o recurrente,media,no,no,1,NA,alta ruralidad,no,no,C,0.8,0.1652,0.1817,0.5059,4
+68,11,F,en tratamiento,59,8,media,8,III,medio,0-3,alta,NA,baja,sí,baja presencia,0,Pólipo nasal con apnea,no,sí,no,6,NA,urbano,sí,no,A,1.3,0.2594,0.318,0.2423,4
+69,9,F,en tratamiento,151,8,media,5,III,bajo,4-6,media,no,media,no,sin presencia,0,Amígdalas obstructivas con apnea,severa,no,no,1,NA,rural,no,no,A,1.2,0.1574,0.2466,0.6201,4
+70,12,M,en tratamiento,74,5,alta,5,II,bajo,0-3,media,no,media,no,baja presencia,0,Amigdalitis crónica o recurrente,severa,no,no,9,NA,alta ruralidad,no,no,C,0.8,0.2137,0.2373,0.4862,4
+71,48,F,nuevo,370,11,media,5,IV,medio,13-18,alta,NA,baja,sí,sin presencia,I,Hipertrofia de amígdalas y adenoides,severa,no,sí,10,no,alta ruralidad,no,no,A,1.0,0.2714,0.5022,1.105,1
+72,19,M,nuevo,10,21,alta,5,VI,medio,0-3,media,NA,baja,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,3,sí,urbano,no,no,A,1.0,0.2769,0.2896,0.0156,4
+73,8,F,en tratamiento,158,11,media,0,IV,severo,4-6,baja,sí,baja,sí,baja presencia,I,Hipertrofia de amígdalas y adenoides,no,sí,no,5,NA,urbano,no,no,A,1.0,0.2707,0.4329,0.4719,2
+74,25,F,en tratamiento,89,15,alta,4,V,medio,0-3,baja,NA,media,no,sin presencia,0,Amigdalitis crónica o recurrente,media,no,sí,4,sí,urbano,no,no,C,0.8,0.2305,0.2524,0.1949,4
+75,13,M,en tratamiento,11,21,media,7,VI,bajo,0-3,alta,no,alta,no,alta presencia,0,Amigdalitis crónica o recurrente,no,sí,no,8,NA,alta ruralidad,no,no,C,0.8,0.2354,0.2387,0.0172,4
+76,15,F,en tratamiento,16,2,alta,4,I,bajo,0-3,alta,no,media,no,baja presencia,0,Amígdalas obstructivas con apnea,severa,no,sí,9,NA,rural,no,no,A,1.2,0.2611,0.278,0.2628,4
+77,38,F,en tratamiento,50,2,media,10,I,medio,0-3,alta,NA,baja,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,8,no,urbano,no,no,A,1.0,0.2503,0.3134,0.8213,4
+78,36,F,en tratamiento,41,5,alta,1,II,severo,0-3,baja,NA,media,no,sin presencia,I,Hipertrofia de amígdalas y adenoides,severa,no,sí,8,sí,alta ruralidad,no,no,A,1.0,0.2893,0.3289,0.2694,2
+79,24,F,en tratamiento,201,30,alta,4,VII,severo,7-9,media,sí,media,sí,sin presencia,II,Amigdalitis crónica o recurrente,severa,sí,sí,9,sí,alta ruralidad,sí,no,C,0.8,0.4593,0.5364,0.2201,2
+80,4,F,en tratamiento,208,8,alta,7,III,medio,7-9,media,sí,media,no,baja presencia,0,Amígdalas obstructivas con apnea,severa,no,no,4,NA,alta ruralidad,sí,no,A,1.2,0.2977,0.5182,0.8541,2
+81,44,M,en tratamiento,174,5,media,6,II,medio,4-6,alta,no,media,sí,baja presencia,0,Desviación septal sin apnea,media,no,sí,7,sí,urbano,no,no,C,1.2,0.3056,0.3572,1.1432,1
+82,8,F,en tratamiento,136,42,media,6,VIII,medio,4-6,alta,sí,media,sí,baja presencia,0,Amígdalas obstructivas con apnea,media,no,no,6,NA,urbano,no,no,A,1.2,0.2726,0.4515,0.1064,2
+83,3,M,en tratamiento,77,2,baja,6,I,severo,0-3,media,NA,media,sí,baja presencia,0,Amígdalas obstructivas con apnea,media,no,no,7,NA,alta ruralidad,no,no,A,1.2,0.2343,0.3178,1.2648,3
+84,9,M,en tratamiento,214,42,alta,8,VIII,bajo,7-9,alta,no,alta,sí,baja presencia,0,Perforación timpánica,severa,no,no,10,NA,rural,no,no,C,1.0,0.2787,0.3472,0.1674,2
+85,24,M,en tratamiento,53,30,baja,3,VII,medio,0-3,media,sí,alta,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,no,3,sí,rural,sí,no,A,1.0,0.3433,0.4112,0.058,2
+86,20,M,en tratamiento,52,2,alta,0,I,severo,0-3,alta,sí,baja,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,6,sí,urbano,no,no,A,1.0,0.3416,0.4258,0.8541,2
+87,36,M,en tratamiento,51,15,alta,8,V,bajo,0-3,alta,NA,media,no,sin presencia,0,Desviación septal sin apnea,media,no,sí,6,NA,urbano,no,no,C,1.2,0.2195,0.2346,0.1117,4
+88,83,M,en tratamiento,347,2,alta,6,I,severo,10-12,alta,NA,media,no,baja presencia,0,Obstrucción lacrimal,no,no,no,7,NA,urbano,no,no,B,0.7,0.2303,0.3348,5.6997,1
+89,40,M,nuevo,72,5,alta,7,II,severo,0-3,media,NA,alta,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,sí,no,4,sí,urbano,no,no,A,1.0,0.3477,0.4514,0.4731,2
+90,43,M,en tratamiento,67,42,alta,6,VIII,medio,0-3,media,NA,alta,sí,baja presencia,0,Obstrucción de conductos lagrimales,no,no,no,7,no,urbano,sí,sí,C,0.7,0.264,0.2911,0.0524,4
+91,20,M,en tratamiento,7,5,media,6,II,severo,0-3,media,sí,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,5,no,rural,no,no,A,1.0,0.2905,0.2991,0.046,4
+92,47,F,en tratamiento,7,2,media,6,I,bajo,0-3,alta,NA,baja,sí,baja presencia,I,Mucocele frontal,media,sí,no,6,sí,urbano,sí,no,B,1.8,0.2962,0.2999,0.115,4
+93,14,F,en tratamiento,100,8,media,8,III,bajo,4-6,alta,sí,media,sí,baja presencia,II,Obstrucción lacrimal,no,no,sí,4,NA,rural,no,sí,B,0.7,0.3121,0.3807,0.4106,2
+94,12,M,en tratamiento,33,5,alta,6,II,severo,0-3,media,NA,baja,no,baja presencia,0,Amigdalitis crónica o recurrente,media,no,no,7,NA,rural,no,no,C,0.8,0.2134,0.2243,0.2168,4
+95,11,M,en tratamiento,77,42,alta,0,VIII,bajo,0-3,baja,sí,baja,sí,sin presencia,0,Perforación timpánica,no,no,sí,4,NA,urbano,sí,no,C,1.0,0.2584,0.2843,0.0602,4
+96,6,F,en tratamiento,419,21,media,5,VI,medio,13-18,alta,sí,alta,no,baja presencia,I,Rinodesviación,severa,no,sí,4,NA,rural,sí,no,C,1.2,0.3262,0.4068,0.6555,2
+97,45,F,en tratamiento,45,2,media,5,I,medio,0-3,media,NA,media,sí,baja presencia,I,Obstrucción de conductos lagrimales,media,no,sí,8,no,urbano,no,no,C,0.7,0.2576,0.2731,0.7392,4
+98,19,M,en tratamiento,67,21,alta,10,VI,bajo,0-3,alta,no,baja,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,no,9,no,urbano,no,no,A,1.0,0.2422,0.3113,0.1048,4
+99,8,F,nuevo,197,11,media,5,IV,medio,7-9,media,NA,baja,sí,sin presencia,IV,Rinodesviación,media,sí,no,8,NA,alta ruralidad,no,no,C,1.2,0.2432,0.2832,0.5883,4
+100,12,F,en tratamiento,125,2,media,7,I,bajo,4-6,alta,sí,media,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,7,NA,urbano,sí,no,A,1.0,0.3015,0.4684,2.0532,1
+101,12,M,en tratamiento,48,5,alta,5,II,medio,0-3,alta,sí,media,sí,baja presencia,II,Hipertrofia de amígdalas y adenoides,media,no,no,8,NA,urbano,sí,no,A,1.0,0.3362,0.4149,0.3154,2
+102,19,M,en tratamiento,328,11,alta,7,IV,medio,10-12,alta,sí,alta,sí,sin presencia,0,Amigdalitis crónica o recurrente,media,no,no,8,sí,urbano,no,no,C,0.8,0.3444,0.4353,0.9796,2
+103,44,M,en tratamiento,193,5,alta,5,II,bajo,7-9,alta,NA,baja,sí,sin presencia,0,Obstrucción lacrimal,severa,no,no,7,sí,rural,no,no,B,0.7,0.2694,0.3613,1.2681,1
+104,99,M,en tratamiento,40,15,media,3,V,medio,0-3,alta,NA,baja,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,4,NA,rural,no,no,A,1.0,0.1806,0.2144,0.0876,4
+105,52,M,en tratamiento,287,2,media,6,I,bajo,10-12,baja,no,media,sí,sin presencia,0,Desviación septal sin apnea,no,sí,no,8,sí,urbano,no,no,C,1.2,0.2352,0.2731,4.7142,3
+106,48,F,en tratamiento,7,8,alta,2,III,severo,0-3,alta,NA,media,sí,sin presencia,0,Septoplastia con apnea,media,no,no,6,sí,alta ruralidad,no,no,A,1.5,0.3089,0.3183,0.0287,4
+107,4,F,en tratamiento,7,15,baja,1,V,severo,0-3,baja,no,media,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,sí,5,NA,urbano,no,sí,A,1.0,0.1901,0.1949,0.0153,4
+108,20,F,en tratamiento,157,5,media,6,II,bajo,4-6,alta,sí,media,sí,alta presencia,0,Pólipo nasal sin apnea,media,sí,no,6,sí,urbano,no,no,C,1.0,0.3514,0.4111,1.0315,1
+109,3,F,en tratamiento,117,21,alta,7,VI,medio,4-6,alta,no,media,no,baja presencia,II,Hipertrofia de amígdalas y adenoides,media,sí,sí,7,NA,urbano,no,no,A,1.0,0.2955,0.415,0.183,2
+110,19,M,en tratamiento,120,11,alta,7,IV,medio,4-6,alta,no,media,sí,baja presencia,0,Perforación timpánica,media,no,sí,6,no,rural,no,no,C,1.0,0.3073,0.3543,0.3584,2
+111,20,M,en tratamiento,224,2,media,5,I,bajo,7-9,media,NA,media,sí,alta presencia,0,Colesteatoma del oído,media,no,no,2,sí,rural,no,no,B,2.5,0.2547,0.3405,3.6794,1
+112,13,M,en tratamiento,223,21,media,4,VI,medio,7-9,baja,NA,media,sí,alta presencia,I,Colesteatoma del oído,media,no,no,1,NA,urbano,sí,no,B,2.5,0.2254,0.3095,0.3489,4
+113,3,M,en tratamiento,39,2,media,4,I,medio,0-3,media,no,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,8,NA,urbano,no,no,A,1.0,0.1982,0.2356,0.6406,4
+114,20,F,en tratamiento,46,5,media,5,II,bajo,0-3,alta,sí,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,4,no,urbano,no,no,A,1.0,0.273,0.3272,0.3022,2
+115,15,M,en tratamiento,100,5,media,6,II,bajo,4-6,baja,no,media,no,alta presencia,0,Desviación septal sin apnea,media,no,no,7,NA,urbano,no,no,C,1.2,0.1566,0.1788,0.657,4
+116,0,F,nuevo,7,2,media,5,I,medio,0-3,media,sí,alta,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,4,NA,urbano,no,no,A,1.0,0.2761,0.2862,0.115,4
+117,15,F,nuevo,249,5,media,7,II,severo,7-9,alta,NA,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,3,NA,urbano,no,no,A,1.0,0.2235,0.4205,1.636,1
+118,19,M,en tratamiento,64,8,media,2,III,severo,0-3,alta,no,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,8,sí,alta ruralidad,no,no,A,1.0,0.2551,0.3204,0.2628,4
+119,48,F,en tratamiento,53,8,alta,7,III,severo,0-3,media,NA,media,sí,sin presencia,0,Sinusitis crónica simple,severa,no,no,5,sí,rural,no,no,C,1.3,0.3045,0.3281,0.2176,2
+120,20,M,en tratamiento,47,21,media,6,VI,medio,0-3,media,sí,alta,no,alta presencia,0,Amigdalitis crónica o recurrente,media,no,no,4,NA,urbano,no,no,C,0.8,0.2391,0.2584,0.0735,4
+121,96,F,nuevo,7,15,media,8,V,medio,0-3,media,NA,alta,no,baja presencia,0,Otitis media complicada,severa,no,sí,4,NA,urbano,no,no,B,1.5,0.2294,0.233,0.0153,4
+122,7,F,en tratamiento,105,5,media,8,II,medio,4-6,media,sí,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,8,NA,urbano,sí,sí,A,1.0,0.3055,0.4277,0.6899,2
+123,18,F,en tratamiento,170,5,media,7,II,medio,4-6,media,sí,baja,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,7,no,rural,no,no,A,1.0,0.2168,0.3647,1.117,1
+124,27,F,nuevo,9,15,alta,6,V,severo,0-3,alta,NA,baja,sí,alta presencia,I,Hipertrofia de amígdalas y adenoides,no,no,sí,7,sí,urbano,no,no,A,1.0,0.338,0.3505,0.0197,2
+125,12,M,en tratamiento,90,21,alta,5,VI,bajo,0-3,alta,no,alta,no,alta presencia,0,Desviación septal sin apnea,media,no,sí,5,NA,rural,sí,no,C,1.2,0.2875,0.3213,0.1408,4
+126,8,M,en tratamiento,28,15,baja,8,V,bajo,0-3,baja,no,media,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,9,NA,rural,no,no,A,1.0,0.1593,0.1794,0.0613,4
+127,7,F,en tratamiento,98,15,media,8,V,medio,4-6,alta,sí,baja,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,sí,5,NA,urbano,no,no,A,1.0,0.3111,0.4503,0.2146,2
+128,12,M,en tratamiento,79,11,alta,9,IV,medio,0-3,alta,sí,media,sí,baja presencia,0,Otitis media complicada,media,no,no,2,NA,urbano,no,no,B,1.5,0.3073,0.3784,0.2359,2
+129,15,M,en tratamiento,34,8,media,5,III,bajo,0-3,media,NA,baja,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,sí,4,NA,alta ruralidad,no,sí,A,1.0,0.2733,0.3021,0.1396,4
+130,20,F,nuevo,9,5,alta,5,II,severo,0-3,media,no,alta,no,baja presencia,0,Obstrucción lacrimal,severa,sí,no,1,no,urbano,sí,no,B,0.7,0.3059,0.312,0.0591,4
+131,8,F,nuevo,225,2,media,7,I,medio,7-9,alta,NA,media,no,baja presencia,0,Desviación septal sin apnea,media,no,sí,3,NA,urbano,no,no,C,1.2,0.2243,0.2665,3.6958,3
+132,0,F,en tratamiento,32,5,media,5,II,medio,0-3,alta,sí,alta,sí,sin presencia,I,Otitis media complicada,no,sí,sí,9,NA,alta ruralidad,no,no,B,1.5,0.3602,0.3843,0.2102,2
+133,89,M,en tratamiento,59,11,media,4,IV,bajo,0-3,alta,NA,media,no,sin presencia,II,Hipertrofia de amígdalas y adenoides,media,no,no,8,NA,urbano,sí,no,A,1.0,0.1777,0.2187,0.1762,4
+134,20,M,en tratamiento,101,21,media,6,VI,severo,4-6,media,sí,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,4,no,urbano,no,no,A,1.0,0.2766,0.3971,0.158,2
+135,20,M,nuevo,132,15,alta,7,V,bajo,4-6,alta,sí,alta,no,sin presencia,0,Amígdalas obstructivas con apnea,media,no,sí,5,sí,alta ruralidad,no,no,A,1.2,0.3328,0.4856,0.2891,2
+136,12,F,nuevo,139,11,alta,7,IV,bajo,4-6,media,NA,media,sí,baja presencia,II,Hipertrofia de amígdalas y adenoides,severa,no,no,5,NA,urbano,no,no,A,1.0,0.2431,0.3946,0.4151,2
+137,3,F,en tratamiento,35,5,alta,3,II,bajo,0-3,alta,sí,media,no,sin presencia,I,Perforación timpánica,media,no,sí,5,NA,alta ruralidad,no,no,C,1.0,0.2858,0.299,0.23,4
+138,38,F,en tratamiento,188,5,alta,4,II,bajo,7-9,alta,NA,alta,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,6,NA,urbano,sí,no,A,1.0,0.2463,0.4213,1.2352,1
+139,2,M,en tratamiento,31,11,alta,7,IV,medio,0-3,media,no,media,sí,sin presencia,II,Hipertrofia de amígdalas y adenoides,media,no,sí,4,NA,rural,no,no,A,1.0,0.2788,0.3149,0.0926,4
+140,9,M,en tratamiento,28,8,media,4,III,bajo,0-3,alta,no,alta,no,baja presencia,I,Hipertrofia de amígdalas y adenoides,no,sí,no,1,NA,urbano,no,no,A,1.0,0.2052,0.2267,0.115,4
+141,5,F,nuevo,89,30,alta,7,VII,bajo,0-3,baja,sí,media,no,baja presencia,0,Obstrucción de conductos lagrimales,no,no,no,5,NA,alta ruralidad,sí,no,C,0.7,0.2332,0.2626,0.0975,4
+142,37,F,en tratamiento,17,72,baja,6,X,medio,0-3,alta,NA,alta,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,5,sí,urbano,sí,sí,A,1.0,0.2445,0.2602,0.0078,4
+143,39,F,nuevo,32,15,baja,6,V,medio,0-3,media,NA,media,no,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,no,no,7,sí,urbano,sí,no,A,1.0,0.1992,0.2205,0.0701,4
+144,3,M,en tratamiento,147,5,baja,7,II,bajo,4-6,media,NA,media,no,sin presencia,I,Otitis media complicada,severa,sí,no,7,NA,urbano,no,no,B,1.5,0.1778,0.218,0.9658,4
+145,3,F,nuevo,60,5,alta,4,II,bajo,0-3,alta,NA,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,6,NA,rural,no,no,A,1.0,0.2049,0.2625,0.3942,4
+146,16,M,en tratamiento,163,2,media,1,I,medio,4-6,baja,sí,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,7,NA,rural,no,no,A,1.0,0.1945,0.3193,2.6774,3
+147,51,F,en tratamiento,7,2,baja,4,I,bajo,0-3,alta,NA,media,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,5,no,urbano,no,no,A,1.0,0.1948,0.2012,0.115,4
+148,0,F,en tratamiento,10,11,baja,1,IV,bajo,0-3,alta,sí,alta,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,1,NA,urbano,no,no,A,1.0,0.2815,0.2942,0.0299,4
+149,49,F,en tratamiento,36,42,media,4,VIII,bajo,0-3,baja,NA,baja,sí,baja presencia,0,Amigdalitis crónica o recurrente,media,no,sí,8,sí,urbano,no,no,C,0.8,0.2281,0.237,0.0282,4
+150,48,F,en tratamiento,7,5,baja,1,II,medio,0-3,media,NA,media,no,baja presencia,0,Amigdalitis crónica o recurrente,media,no,sí,5,no,rural,sí,no,C,0.8,0.2114,0.2128,0.046,4
+151,15,F,nuevo,59,2,media,5,I,severo,0-3,alta,no,alta,sí,sin presencia,I,Obstrucción de conductos lagrimales,severa,no,no,6,NA,urbano,sí,no,C,0.7,0.2903,0.3167,0.9691,4
+152,34,F,nuevo,392,15,baja,3,V,medio,13-18,baja,NA,alta,sí,baja presencia,I,Amígdalas obstructivas con apnea,severa,sí,no,8,sí,urbano,sí,no,A,1.2,0.296,0.5172,0.8585,2
+153,10,M,en tratamiento,13,5,alta,8,II,medio,0-3,media,no,baja,no,baja presencia,0,Otitis media complicada,severa,no,sí,9,NA,urbano,no,no,B,1.5,0.2417,0.2488,0.0854,4
+154,11,M,nuevo,37,5,media,1,II,severo,0-3,media,sí,media,sí,alta presencia,0,Perforación timpánica,severa,no,no,7,NA,alta ruralidad,no,no,C,1.0,0.3208,0.3406,0.2431,2
+155,0,F,en tratamiento,7,21,media,7,VI,medio,0-3,media,no,media,sí,alta presencia,0,Otitis media complicada,media,no,no,6,NA,alta ruralidad,no,no,B,1.5,0.2405,0.2449,0.011,4
+156,15,F,en tratamiento,149,15,alta,7,V,bajo,4-6,alta,no,media,no,sin presencia,I,Perforación timpánica,media,no,no,2,NA,urbano,no,no,C,1.0,0.1848,0.2201,0.3263,4
+157,0,F,en tratamiento,75,5,alta,7,II,severo,0-3,alta,no,alta,no,alta presencia,II,Perforación timpánica,severa,no,no,6,NA,urbano,no,no,C,1.0,0.2879,0.3242,0.4928,4
+158,17,M,nuevo,61,2,media,1,I,medio,0-3,media,NA,media,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,3,NA,urbano,no,no,A,1.0,0.2559,0.3218,1.002,3
+159,16,F,nuevo,116,8,media,5,III,bajo,4-6,alta,NA,media,sí,alta presencia,0,Obstrucción de conductos lagrimales,media,no,no,7,NA,alta ruralidad,no,no,C,0.7,0.2406,0.2795,0.4763,4
+160,53,M,en tratamiento,60,5,media,5,II,severo,0-3,media,NA,media,no,sin presencia,I,Hipertrofia de amígdalas y adenoides,severa,no,no,5,no,urbano,no,no,A,1.0,0.1946,0.2489,0.3942,4
+161,11,F,nuevo,91,5,alta,5,II,bajo,0-3,alta,sí,baja,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,no,no,no,4,NA,alta ruralidad,no,no,A,1.0,0.2473,0.3541,0.5979,2
+162,34,M,nuevo,96,8,alta,4,III,severo,4-6,alta,NA,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,3,sí,rural,no,no,A,1.0,0.2884,0.4071,0.3942,2
+163,49,F,en tratamiento,173,15,media,2,V,bajo,4-6,media,NA,baja,sí,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,no,4,NA,urbano,no,no,A,1.0,0.2204,0.3547,0.3789,2
+164,66,F,en tratamiento,58,5,media,3,II,medio,0-3,media,NA,media,sí,sin presencia,0,Hipertrofia de amígdalas y adenoides,severa,sí,no,8,NA,urbano,no,no,A,1.0,0.2434,0.3023,0.3811,4
+165,16,M,nuevo,182,2,alta,5,I,medio,4-6,baja,sí,media,no,alta presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,1,NA,rural,sí,sí,A,1.0,0.2807,0.4714,2.9895,1
+166,5,M,en tratamiento,58,72,alta,7,X,medio,0-3,alta,no,alta,no,baja presencia,I,Amigdalitis crónica o recurrente,severa,no,no,6,NA,rural,no,no,C,0.8,0.2455,0.2692,0.0265,4
+167,8,F,en tratamiento,73,2,media,6,I,severo,0-3,media,no,media,sí,alta presencia,0,Rinodesviación,media,no,sí,3,NA,alta ruralidad,no,no,C,1.2,0.3036,0.3344,1.1991,1
+168,6,M,en tratamiento,156,5,media,5,II,bajo,4-6,alta,no,baja,sí,alta presencia,0,Amigdalitis crónica o recurrente,no,no,no,4,NA,rural,no,no,C,0.8,0.2078,0.2475,1.025,3
+169,86,F,en tratamiento,208,15,alta,2,V,severo,7-9,baja,no,alta,sí,alta presencia,0,Otitis media complicada,media,no,sí,9,NA,urbano,sí,no,B,1.5,0.3321,0.4515,0.4555,2
+170,5,F,en tratamiento,186,2,media,4,I,bajo,7-9,media,no,baja,no,sin presencia,0,Desviación septal sin apnea,media,sí,no,6,NA,urbano,no,no,C,1.2,0.1632,0.1862,3.0552,3
+171,13,M,en tratamiento,540,8,alta,7,III,bajo,13-18,alta,no,media,sí,sin presencia,0,Desviación septal sin apnea,severa,no,sí,6,NA,urbano,no,no,C,1.2,0.2843,0.3672,2.2175,1
+172,1,F,en tratamiento,184,42,alta,6,VIII,medio,7-9,alta,sí,media,no,sin presencia,0,Desviación septal sin apnea,media,no,no,4,NA,urbano,no,no,C,1.2,0.2428,0.3006,0.1439,4
+173,2,F,nuevo,14,11,alta,5,IV,bajo,0-3,alta,sí,media,sí,baja presencia,0,Desviación septal sin apnea,no,no,sí,2,NA,urbano,no,no,C,1.2,0.3092,0.3158,0.0418,4
+174,69,F,en tratamiento,7,42,alta,8,VIII,bajo,0-3,media,NA,media,sí,baja presencia,0,Obstrucción lacrimal,severa,sí,sí,6,NA,rural,no,no,B,0.7,0.3169,0.3217,0.0055,4
+175,18,M,en tratamiento,75,8,media,8,III,medio,0-3,alta,sí,media,sí,baja presencia,0,Otitis media complicada,media,no,sí,6,NA,urbano,no,no,B,1.5,0.3196,0.3802,0.308,2
+176,18,F,nuevo,84,2,media,6,I,medio,0-3,media,sí,media,no,baja presencia,0,Sinusitis crónica complicada,no,sí,no,2,sí,urbano,no,no,B,2.0,0.2779,0.3237,1.3798,3
+177,10,M,en tratamiento,128,72,baja,6,X,severo,4-6,media,sí,media,sí,baja presencia,0,Rinodesviación,media,sí,no,4,NA,urbano,no,no,C,1.2,0.2939,0.3437,0.0584,2
+178,4,F,en tratamiento,11,8,baja,3,III,medio,0-3,baja,sí,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,no,2,NA,urbano,sí,no,A,1.0,0.1962,0.2054,0.0452,4
+179,11,M,nuevo,146,15,media,3,V,bajo,4-6,alta,no,baja,sí,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,sí,no,3,NA,urbano,no,no,A,1.0,0.2251,0.3459,0.3198,2
+180,18,M,en tratamiento,132,5,media,4,II,severo,4-6,alta,sí,alta,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,8,sí,urbano,no,no,A,1.0,0.3442,0.5125,0.8673,2
+181,12,F,en tratamiento,34,5,alta,6,II,bajo,0-3,media,NA,media,no,baja presencia,II,Amígdalas obstructivas con apnea,media,no,no,6,NA,urbano,no,no,A,1.2,0.1901,0.2198,0.2234,4
+182,88,F,nuevo,11,15,alta,4,V,severo,0-3,media,NA,media,no,baja presencia,0,Perforación timpánica,no,sí,no,0,NA,urbano,no,no,C,1.0,0.2316,0.2351,0.0241,4
+183,39,M,en tratamiento,88,2,alta,2,I,bajo,0-3,alta,NA,alta,no,sin presencia,0,Sinusitis crónica complicada,media,no,no,6,no,urbano,no,no,B,2.0,0.1963,0.2408,1.4455,3
+184,3,F,en tratamiento,39,21,media,8,VI,medio,0-3,alta,no,baja,no,baja presencia,I,Sinusitis crónica complicada,media,no,no,6,NA,urbano,no,no,B,2.0,0.1738,0.1915,0.061,4
+185,16,F,en tratamiento,307,8,media,6,III,bajo,10-12,alta,sí,alta,sí,baja presencia,I,Amígdalas obstructivas con apnea,media,no,sí,6,NA,rural,no,sí,A,1.2,0.3358,0.6228,1.2607,1
+186,14,M,en tratamiento,57,30,media,0,VII,bajo,0-3,alta,sí,baja,sí,baja presencia,0,Amigdalitis crónica o recurrente,severa,no,no,5,NA,urbano,no,no,C,0.8,0.2434,0.2674,0.0624,4
+187,36,F,en tratamiento,92,11,alta,10,IV,severo,4-6,alta,no,baja,sí,baja presencia,0,Otitis media complicada,severa,no,sí,8,no,rural,no,no,B,1.5,0.3344,0.4097,0.2748,2
+188,9,F,nuevo,17,21,baja,4,VI,bajo,0-3,alta,no,media,sí,alta presencia,0,Colesteatoma del oído,no,no,sí,5,NA,rural,sí,no,B,2.5,0.2564,0.2652,0.0266,4
+189,31,M,en tratamiento,68,2,baja,5,I,bajo,0-3,alta,NA,media,no,sin presencia,0,Desviación septal sin apnea,media,sí,sí,10,sí,alta ruralidad,no,sí,C,1.2,0.2711,0.2845,1.117,3
+190,27,F,en tratamiento,181,30,alta,4,VII,bajo,4-6,media,no,alta,sí,baja presencia,0,Amigdalitis crónica o recurrente,no,no,no,6,sí,alta ruralidad,no,no,C,0.8,0.2693,0.3204,0.1982,4
+191,9,F,en tratamiento,91,15,alta,8,V,severo,0-3,alta,sí,alta,no,alta presencia,0,Amigdalitis crónica o recurrente,no,sí,no,5,NA,rural,sí,no,C,0.8,0.3655,0.4135,0.1993,2
+192,62,M,en tratamiento,241,2,baja,2,I,medio,7-9,alta,NA,media,no,baja presencia,0,Hipertrofia de amígdalas y adenoides,media,no,sí,7,sí,rural,no,no,A,1.0,0.2454,0.3747,3.9586,1
+193,78,F,en tratamiento,77,11,alta,0,IV,severo,0-3,alta,NA,alta,no,baja presencia,I,Otitis media complicada,media,sí,no,6,NA,rural,no,no,B,1.5,0.2885,0.3404,0.23,2
+194,3,F,nuevo,116,2,baja,0,I,medio,4-6,alta,no,baja,no,sin presencia,0,Amigdalitis crónica o recurrente,media,no,no,7,NA,urbano,sí,no,C,0.8,0.1545,0.1735,1.9054,3
+195,27,M,en tratamiento,473,15,media,6,V,bajo,13-18,alta,no,media,sí,alta presencia,I,Desviación septal sin apnea,no,no,sí,6,no,urbano,no,no,C,1.2,0.2602,0.3286,1.0359,1
+196,5,F,en tratamiento,7,5,media,5,II,medio,0-3,alta,no,alta,sí,baja presencia,0,Pólipo nasal sin apnea,severa,no,no,6,NA,urbano,sí,no,C,1.0,0.2761,0.2792,0.046,4
+197,43,M,en tratamiento,172,8,baja,4,III,medio,4-6,alta,NA,media,sí,alta presencia,0,Otitis media complicada,media,no,no,1,sí,urbano,no,no,B,1.5,0.2527,0.3374,0.7063,2
+198,10,M,en tratamiento,156,2,media,3,I,bajo,4-6,baja,NA,media,sí,alta presencia,I,Hipertrofia de amígdalas y adenoides,media,no,sí,6,NA,urbano,no,no,A,1.0,0.2346,0.3604,2.5624,1
+199,59,F,nuevo,36,2,media,6,I,severo,0-3,alta,sí,media,no,baja presencia,0,Amigdalitis crónica o recurrente,media,no,no,3,sí,alta ruralidad,sí,no,C,0.8,0.3286,0.3442,0.5913,2
+200,5,M,en tratamiento,50,11,alta,4,IV,bajo,0-3,alta,no,media,no,baja presencia,0,Sinusitis crónica simple,severa,no,no,10,NA,urbano,no,no,C,1.3,0.2103,0.2277,0.1493,4

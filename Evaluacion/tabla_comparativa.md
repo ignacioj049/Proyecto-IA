@@ -1,4 +1,5 @@
-| algoritmo   |   tiempo_ejecucion_seg |   pacientes_seleccionados |   horas_usadas |   horas_restantes |   costo_total_agenda |   pacientes_agendados |
-|:------------|-----------------------:|--------------------------:|---------------:|------------------:|---------------------:|----------------------:|
-| Greedy      |                 1.444  |                         7 |            7.5 |               0.5 |               3.0173 |                     7 |
-| Weighted A* |                 0.0956 |                         7 |            7.4 |               0.6 |               4.0249 |                     7 |
+| algoritmo      |   promedio_dias_espera_al_agendar |   pacientes_vulnerables_sin_operar |   tiempo_computo_total_seg |   tiempo_computo_promedio_seg_por_semana |   semanas_ejecutadas |   pacientes_agendados |   pacientes_pendientes_final |
+|:---------------|----------------------------------:|-----------------------------------:|---------------------------:|-----------------------------------------:|---------------------:|----------------------:|-----------------------------:|
+| FIFO           |                           204.925 |                                  0 |                   0.958366 |                                0.0330471 |                   29 |                   200 |                            0 |
+| Greedy (paper) |                           206.43  |                                  0 |                   2.06055  |                                0.0710534 |                   29 |                   200 |                            0 |
+| Weighted A*    |                           205.24  |                                  0 |                  11.8926   |                                0.410091  |                   29 |                   200 |                            0 |

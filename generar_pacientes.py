@@ -249,7 +249,7 @@ def validar_contra_ejemplo_paper():
     """
     Reproduce el ejemplo artificial de la Sección 3.4.2 del paper:
     paciente de 10 años, diagnóstico "amigdalitis crónica o recurrente",
-    Urg=6, ingresado el 31.08.2018, para comparar sp y vp(t) contra la
+    Urg=5, ingresado el 31.08.2018, para comparar sp y vp(t) contra la
     Tabla 5 del paper.
     """
     paciente_ejemplo = {
